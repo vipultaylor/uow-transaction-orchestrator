@@ -172,7 +172,7 @@ uow-core              Foundation framework (DML, policies, plugins)
 
 ### Component Diagram
 
-![UoW Architecture Overview](docs/wiki/images/uow-architecture-overview.svg)
+![UoW Architecture Overview](https://raw.githubusercontent.com/wiki/vipultaylor/uow-transaction-orchestrator/images/uow-architecture-overview.svg)
 
 See [Architecture Overview](https://github.com/vipultaylor/uow-transaction-orchestrator/wiki/Architecture) for detailed diagrams.
 
@@ -324,31 +324,31 @@ The UoW Audit Package provides enterprise-grade observability with rich visualiz
 
 Browse and search all audited transactions with status, scenario tags, execution context, and timing.
 
-> ![Audit Transactions List View](docs/wiki/images/screenshots/audit-transactions-list-view.png)
+> ![Audit Transactions List View](https://raw.githubusercontent.com/wiki/vipultaylor/uow-transaction-orchestrator/images/screenshots/audit-transactions-list-view.png)
 
 ### Timeline Visualization
 
 OpenTelemetry-based hierarchical view of transaction execution with phase-level timing and status indicators.
 
-> ![Timeline - Successful Transaction](docs/wiki/images/screenshots/timeline-success.png)
+> ![Timeline - Successful Transaction](https://raw.githubusercontent.com/wiki/vipultaylor/uow-transaction-orchestrator/images/screenshots/timeline-success.png)
 
 ### Work Item Tracking
 
 ALL registered work items are captured with their final status — SUCCESS, FAILED, SKIPPED, or NOT_EXECUTED — along with record snapshots and origin source metadata.
 
-> ![Work Items](docs/wiki/images/screenshots/work-items-success.png)
+> ![Work Items](https://raw.githubusercontent.com/wiki/vipultaylor/uow-transaction-orchestrator/images/screenshots/work-items-success.png)
 
 ### Governor Limits Tracking
 
 Per-operation limit consumption with before/after snapshots across DML, SOQL, CPU, heap, callouts, and more.
 
-> ![Governor Limits](docs/wiki/images/screenshots/governor-limits-transaction.png)
+> ![Governor Limits](https://raw.githubusercontent.com/wiki/vipultaylor/uow-transaction-orchestrator/images/screenshots/governor-limits-transaction.png)
 
 ### Messages Console & Error Tracking
 
 Developer console-style log viewer with severity filtering, detailed error capture with stack traces, and contextual suggestions.
 
-> ![Messages Console](docs/wiki/images/screenshots/logs-tab.png)
+> ![Messages Console](https://raw.githubusercontent.com/wiki/vipultaylor/uow-transaction-orchestrator/images/screenshots/logs-tab.png)
 
 See [Audit System Documentation](https://github.com/vipultaylor/uow-transaction-orchestrator/wiki/Audit-System) for architecture, storage modes, configuration, and all feature details.
 
