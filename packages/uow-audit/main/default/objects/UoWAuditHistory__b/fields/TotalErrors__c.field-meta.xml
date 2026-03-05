@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalErrors__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Total number of errors in the transaction. Denormalized for error analysis.</description>
+    <externalId>false</externalId>
+    <label>Total Errors</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <securityClassification>Internal</securityClassification>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

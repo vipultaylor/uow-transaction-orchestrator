@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsQueryLocatorRowsConsumed__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Formula: Query locator rows consumed by this operation.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(NOT(ISBLANK(LimitsQueryLocatorRowsAtEnd__c)), NOT(ISBLANK(LimitsQueryLocatorRowsAtStart__c))),
+    LimitsQueryLocatorRowsAtEnd__c - LimitsQueryLocatorRowsAtStart__c,
+    NULL
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Formula: Query locator rows consumed by this operation.</inlineHelpText>
+    <label>Query Locator Rows Consumed</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

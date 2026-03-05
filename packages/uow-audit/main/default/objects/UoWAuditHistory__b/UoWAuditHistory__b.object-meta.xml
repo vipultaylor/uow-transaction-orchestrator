@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Big Object for long-term storage of UoW audit archive. Stores archived transaction and work item data for compliance and historical analysis.</description>
+    <label>Audit Archive</label>
+    <pluralLabel>Audit Archives</pluralLabel>
+</CustomObject>

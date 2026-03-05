@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NotificationRecipients__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <complianceGroup>PII;GDPR;CCPA</complianceGroup>
+    <description>JSON array of notification recipient user IDs. Work item events only (NOTIFICATION type).</description>
+    <isFilteringDisabled>false</isFilteringDisabled>
+    <isNameField>false</isNameField>
+    <isSortingDisabled>false</isSortingDisabled>
+    <label>Notification Recipients</label>
+    <length>10000</length>
+    <securityClassification>Confidential</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>2</visibleLines>
+</CustomField>

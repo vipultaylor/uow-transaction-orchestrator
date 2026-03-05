@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MatchPattern__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Regex pattern for matching field values. For REGEX_PATTERN: regex pattern to match the value (e.g., \d{3}-\d{2}-\d{4} for SSN format). For EXACT_FIELD: not used (use FieldApiName__c instead).</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Required for REGEX_PATTERN match type. Enter regex to match field VALUES. Example: \d{3}-\d{2}-\d{4} matches SSN format. Not used for EXACT_FIELD.</inlineHelpText>
+    <label>Match Pattern</label>
+    <length>32768</length>
+    <securityClassification>Internal</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,18 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <div class="slds-p-around_xx-large slds-text-align_center uow-empty-state">
+        <lightning-icon
+            icon-name={iconName}
+            size={iconSize}
+            variant={iconVariant}
+            class="slds-m-bottom_small">
+        </lightning-icon>
+        <p lwc:if={hasHeading} class="slds-text-heading_small slds-m-top_small">{heading}</p>
+        <p lwc:if={hasBody} class="slds-text-body_regular slds-text-color_weak slds-m-top_xx-small">
+            {body}
+        </p>
+    </div>
+</template>

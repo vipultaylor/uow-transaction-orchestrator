@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ResultSummary__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Descriptive summary of work item execution results. Examples: &quot;2/2 records saved&quot;, &quot;1/2 events published&quot;, &quot;0/1 callouts failed&quot;, &quot;—/2 pending&quot;.</description>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(WorkItemStatus__c) == &quot;NOT_EXECUTED&quot;,
+   TEXT(PlannedCount__c) &amp; &quot; &quot; &amp;
+   CASE(WorkType__c,
+      &quot;DML&quot;, &quot;record(s)&quot;,
+      &quot;EVENT&quot;, &quot;event(s)&quot;,
+      &quot;FLOW&quot;, &quot;flow(s)&quot;,
+      &quot;EMAIL&quot;, &quot;email(s)&quot;,
+      &quot;NOTIFICATION&quot;, &quot;notification(s)&quot;,
+      &quot;CALLOUT&quot;, &quot;callout(s)&quot;,
+      &quot;item(s)&quot;
+   ) &amp; &quot; skipped&quot;,
+   TEXT(SuccessCount__c) &amp; &quot;/&quot; &amp; TEXT(PlannedCount__c) &amp; &quot; &quot; &amp;
+   CASE(WorkType__c,
+      &quot;DML&quot;, CASE(TEXT(DmlOperation__c),
+         &quot;DELETE_OP&quot;, &quot;record(s) deleted&quot;,
+         &quot;UNDELETE_OP&quot;, &quot;record(s) restored&quot;,
+         &quot;record(s) saved&quot;
+      ),
+      &quot;EVENT&quot;, &quot;event(s) published&quot;,
+      &quot;FLOW&quot;, &quot;flow(s) executed&quot;,
+      &quot;EMAIL&quot;, &quot;email(s) sent&quot;,
+      &quot;NOTIFICATION&quot;, &quot;notification(s) sent&quot;,
+      &quot;CALLOUT&quot;, &quot;callout(s) executed&quot;,
+      &quot;items processed&quot;
+   )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Descriptive summary of work item execution results. Examples: &quot;2/2 records saved&quot;, &quot;1/2 events published&quot;, &quot;0/1 callouts failed&quot;, &quot;—/2 pending&quot;.</inlineHelpText>
+    <label>Result Summary</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

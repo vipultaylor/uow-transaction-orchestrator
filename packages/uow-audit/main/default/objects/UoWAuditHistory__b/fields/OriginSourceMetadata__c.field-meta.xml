@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OriginSourceMetadata__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>JSON containing additional source metadata about the origin point.</description>
+    <label>Origin Source Metadata</label>
+    <length>32768</length>
+    <securityClassification>Internal</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

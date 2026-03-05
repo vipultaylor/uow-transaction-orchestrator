@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UserRoleName__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Name of the user&apos;s role. Denormalized for role-based analysis.</description>
+    <externalId>false</externalId>
+    <label>User Role Name</label>
+    <length>255</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

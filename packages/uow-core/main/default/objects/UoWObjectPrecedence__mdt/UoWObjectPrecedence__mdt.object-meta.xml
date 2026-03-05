@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Global DML execution precedence for SObject types. Lower precedence values execute first. Used to establish default ordering when no explicit relate() relationship exists between objects. This is org-wide configuration, not per-UoW-Configuration.</description>
+    <label>UoW Object Precedence</label>
+    <pluralLabel>UoW Object Precedences</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

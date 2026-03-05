@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PolicyEvaluationSummary__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Full policy evaluation summary as JSON</description>
+    <inlineHelpText>Full policy evaluation summary as JSON</inlineHelpText>
+    <label>Policy Evaluation Summary</label>
+    <length>131072</length>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

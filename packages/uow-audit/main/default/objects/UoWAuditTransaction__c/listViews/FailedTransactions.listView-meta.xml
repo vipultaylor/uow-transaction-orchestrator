@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FailedTransactions</fullName>
+    <columns>NAME</columns>
+    <columns>TransactionScenarioDisplay__c</columns>
+    <columns>TransactionStatus__c</columns>
+    <columns>StartTime__c</columns>
+    <columns>CommitMode__c</columns>
+    <columns>TotalWorkItems__c</columns>
+    <columns>ErrorCount__c</columns>
+    <columns>ExecutionContext__c</columns>
+    <columns>ExecutionTimeMs__c</columns>
+    <columns>TracingEnabled__c</columns>
+    <columns>CorrelationId__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TransactionStatus__c</field>
+        <operation>equals</operation>
+        <value>FAILED,ROLLED_BACK,REJECTED,DENIED_BY_POLICY</value>
+    </filters>
+    <label>Failed Transactions</label>
+</ListView>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TransactionScenarioName__c</fullName>
+    <description>A business transaction scenario - used always - is displayed when the UoW Scenario record is not available or not stored</description>
+    <externalId>false</externalId>
+    <inlineHelpText>A business transaction scenario - used always - is displayed when the UoW Scenario record is not available or not stored</inlineHelpText>
+    <label>Transaction Scenario Name</label>
+    <length>80</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

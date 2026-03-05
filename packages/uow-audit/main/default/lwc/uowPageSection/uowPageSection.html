@@ -1,0 +1,40 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <div class={sectionClass}>
+        <!-- Section Header -->
+        <h3 class="slds-section__title slds-truncate slds-p-around_xx-small slds-theme_shade">
+            <button class="slds-button slds-section__title-action"
+                onclick={handleToggle}>
+                <lightning-icon
+                    icon-name={toggleIconName}
+                    size="x-small"
+                    class="slds-section__title-action-icon slds-button__icon_left">
+                </lightning-icon>
+                <template lwc:if={iconName}>
+                    <lightning-icon
+                        icon-name={iconName}
+                        size="x-small"
+                        class="slds-m-left_xx-small slds-m-right_xx-small">
+                    </lightning-icon>
+                </template>
+                <span class="slds-truncate slds-m-left_xx-small">
+                    <!-- Title: use title attribute or slot -->
+                    <template lwc:if={title}>{title}</template>
+                    <template lwc:else><slot name="title"></slot></template>
+                </span>
+            </button>
+        </h3>
+
+        <!-- Section Content -->
+        <div class={contentClass}>
+            <lightning-layout class="slds-p-horizontal_medium">
+                <lightning-layout-item size="12">
+                    <slot name="content"></slot>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

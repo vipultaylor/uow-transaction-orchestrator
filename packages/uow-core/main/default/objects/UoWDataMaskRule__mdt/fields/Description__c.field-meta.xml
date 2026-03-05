@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Description of this masking rule, its purpose, and examples of matched fields or patterns.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Describe what this rule masks and why. Include examples of matched values for documentation.</inlineHelpText>
+    <label>Description</label>
+    <length>32768</length>
+    <securityClassification>Internal</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

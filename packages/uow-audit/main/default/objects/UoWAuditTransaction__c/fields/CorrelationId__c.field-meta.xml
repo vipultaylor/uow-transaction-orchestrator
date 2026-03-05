@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CorrelationId__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>UUID correlation ID for distributed tracing across async boundaries. Same correlation ID is shared across parent and child async transactions.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>UUID correlation ID for distributed tracing across async boundaries. Same correlation ID is shared across parent and child async transactions.</inlineHelpText>
+    <label>Correlation ID</label>
+    <length>36</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

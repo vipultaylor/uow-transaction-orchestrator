@@ -1,0 +1,239 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/* uowSpanItem.css - OTel-aligned span item styling */
+@import 'c/uowSharedStylesModule';
+
+/* ============================================================================
+   ICON CATEGORY COLORS - UoW-specific semantic colors
+   ============================================================================ */
+
+.uow-span-icon-framework {
+    background-color: var(--uow-category-framework);
+}
+
+.uow-span-icon-transact {
+    background-color: var(--uow-category-transaction);
+}
+
+.uow-span-icon-dml {
+    background-color: var(--uow-category-dml);
+}
+
+.uow-span-icon-platform_event {
+    background-color: var(--uow-category-event);
+}
+
+.uow-span-icon-callout {
+    background-color: var(--uow-category-callout);
+}
+
+.uow-span-icon-email {
+    background-color: var(--uow-category-email);
+}
+
+.uow-span-icon-notification {
+    background-color: var(--uow-category-notification);
+}
+
+.uow-span-icon-flow {
+    background-color: var(--uow-category-flow);
+}
+
+.uow-span-icon-validation {
+    background-color: var(--uow-category-validation);
+}
+
+.uow-span-icon-security {
+    background-color: var(--uow-category-security);
+}
+
+.uow-span-icon-policy {
+    background-color: var(--uow-category-policy);
+}
+
+.uow-span-icon-risk {
+    background-color: var(--uow-category-risk);
+}
+
+.uow-span-icon-approval {
+    background-color: var(--uow-category-approval);
+}
+
+.uow-span-icon-plugin {
+    background-color: var(--uow-category-plugin);
+}
+
+.uow-span-icon-dependency {
+    background-color: var(--uow-category-dependency);
+}
+
+.uow-span-icon-work_phase {
+    background-color: var(--uow-category-work_phase);
+}
+
+.uow-span-icon-finalization {
+    background-color: var(--uow-category-finalization);
+}
+
+.uow-span-icon-default {
+    background-color: var(--uow-category-default);
+}
+
+.uow-span-icon-error {
+    background-color: var(--uow-category-error);
+}
+
+.uow-span-icon-warning {
+    background-color: var(--uow-status-warning);
+}
+
+/* ============================================================================
+   ICON SIZING AND POSITIONING
+   Using SLDS spacing tokens where applicable
+   ============================================================================ */
+
+.uow-span-icon_container {
+    padding: var(--slds-g-spacing-2, 0.25rem);
+}
+
+.uow-span-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Override icon colors to white for visibility on colored backgrounds */
+    --lwc-colorTextIconDefault: var(--uow-timeline-icon-color);
+    --slds-g-color-neutral-base-50: var(--uow-timeline-icon-color);
+    --slds-s-icon-color-foreground: var(--uow-timeline-icon-color);
+    --lwc-squareIconSmallBoundary: var(--slds-g-spacing-4, 1rem);
+    --slds-g-sizing-7: var(--slds-g-spacing-4, 1rem);
+}
+
+/* ============================================================================
+   TRAILING LINES STYLING - UoW category colors for timeline connector
+   ============================================================================ */
+
+.uow-span-item::before {
+    inset-inline-start: 2.5rem;
+}
+
+
+.uow-span__item_framework::before {
+    background-color: var(--uow-category-framework);
+}
+
+.uow-span__item_transact::before {
+    background-color: var(--uow-category-transaction);
+}
+
+.uow-span__item_dml::before {
+    background-color: var(--uow-category-dml);
+}
+
+.uow-span__item_event::before {
+    background-color: var(--uow-category-event);
+}
+
+.uow-span__item_callout::before {
+    background-color: var(--uow-category-callout);
+}
+
+.uow-span__item_email::before {
+    background-color: var(--uow-category-email);
+}
+
+.uow-span__item_notification::before {
+    background-color: var(--uow-category-notification);
+}
+
+.uow-span__item_flow::before {
+    background-color: var(--uow-category-flow);
+}
+
+.uow-span__item_validation::before {
+    background-color: var(--uow-category-validation);
+}
+
+.uow-span__item_security::before {
+    background-color: var(--uow-category-security);
+}
+
+.uow-span__item_policy::before {
+    background-color: var(--uow-category-policy);
+}
+
+.uow-span__item_risk::before {
+    background-color: var(--uow-category-risk);
+}
+
+.uow-span__item_approval::before {
+    background-color: var(--uow-category-approval);
+}
+
+.uow-span__item_plugin::before {
+    background-color: var(--uow-category-plugin);
+}
+
+.uow-span__item_dependency::before {
+    background-color: var(--uow-category-dependency);
+}
+
+.uow-span__item_work_phase::before {
+    background-color: var(--uow-category-work_phase);
+}
+
+.uow-span__item_finalization::before {
+    background-color: var(--uow-category-finalization);
+}
+
+.uow-span__item_error::before {
+    background-color: var(--uow-category-error);
+}
+
+.uow-span__item_warning::before {
+    background-color: var(--uow-status-warning);
+}
+
+.uow-span__item_default::before {
+    background-color: var(--uow-category-default);
+}
+
+/* ============================================================================
+   CONTAINS ERROR STATE - Parent spans with descendant errors
+   Uses warning/orange theme to distinguish from direct ERROR (red)
+   ============================================================================ */
+
+/* Icon with orange ring - indicates error in descendants */
+.uow-span-icon-contains-error {
+    box-shadow: 0 0 0 2px var(--uow-status-warning);
+}
+
+/* Dashed orange connector line for "contains error" path */
+.uow-span__item_contains-error::before {
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--uow-status-warning) 0,
+        var(--uow-status-warning) 4px,
+        transparent 4px,
+        transparent 8px
+    );
+}
+
+/* Contains Error badge styling */
+.uow-badge-contains-error {
+    background-color: var(--uow-severity-warn-background);
+    color: var(--uow-severity-warn-text);
+    border: 1px solid var(--uow-status-warning);
+}
+
+/* Warning/Partial Error badge styling */
+.uow-badge-warning {
+    background-color: var(--uow-severity-warn-background);
+    color: var(--uow-severity-warn-text);
+    border: 1px solid var(--uow-status-warning);
+}

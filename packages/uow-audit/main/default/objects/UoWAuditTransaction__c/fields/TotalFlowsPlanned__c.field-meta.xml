@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalFlowsPlanned__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Total flows planned across all FLOW work items.</description>
+    <inlineHelpText>Total flows planned across all FLOW work items.</inlineHelpText>
+    <label>Total Flows Planned</label>
+    <securityClassification>Internal</securityClassification>
+    <summarizedField>UoWAuditWorkItem__c.PlannedCount__c</summarizedField>
+    <summaryFilterItems>
+        <field>UoWAuditWorkItem__c.WorkType__c</field>
+        <operation>equals</operation>
+        <value>FLOW</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>UoWAuditWorkItem__c.WorkItemStatus__c</field>
+        <operation>notEqual</operation>
+        <value>SKIPPED</value>
+    </summaryFilterItems>
+    <summaryForeignKey>UoWAuditWorkItem__c.AuditTransaction__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

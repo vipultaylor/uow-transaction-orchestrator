@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EventSObjectType__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Platform event SObject type API name</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Platform event SObject type API name</inlineHelpText>
+    <label>Event SObject Type</label>
+    <length>255</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

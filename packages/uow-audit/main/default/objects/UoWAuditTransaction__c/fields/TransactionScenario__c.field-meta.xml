@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TransactionScenario__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Business Scenario under which this transaction was executed</description>
+    <inlineHelpText>Business Scenario under which this transaction was executed</inlineHelpText>
+    <label>Transaction Scenario</label>
+    <referenceTo>UoWScenario__c</referenceTo>
+    <relationshipName>AuditTransactions</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

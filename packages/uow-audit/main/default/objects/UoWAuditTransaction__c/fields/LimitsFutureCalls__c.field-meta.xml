@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsFutureCalls__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Future Calls usage with visual indicator. Shows percentage of limit consumed with warning (80%) and danger (90%) thresholds.</description>
+    <externalId>false</externalId>
+    <formula>IF(LimitsFutureCallsMax__c = 0, &quot;✅ N/A&quot;,
+  IF(LimitsFutureCallsConsumed__c / LimitsFutureCallsMax__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.FutureCalls.TransactionRedPercent__c / 100, &quot;⛔&quot;,
+    IF(LimitsFutureCallsConsumed__c / LimitsFutureCallsMax__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.FutureCalls.TransactionAmberPercent__c / 100, &quot;⚠️&quot;, &quot;✅&quot;)
+  )
+  &amp; &quot; &quot; &amp; TEXT(ROUND(LimitsFutureCallsConsumed__c / LimitsFutureCallsMax__c * 100, 1)) &amp; &quot;% (&quot;
+  &amp; TEXT(LimitsFutureCallsConsumed__c) &amp; &quot; / &quot; &amp; TEXT(LimitsFutureCallsMax__c) &amp; &quot;)&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Future Calls usage with visual indicator. Shows percentage of limit consumed with warning (80%) and danger (90%) thresholds.</inlineHelpText>
+    <label>Future Calls</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

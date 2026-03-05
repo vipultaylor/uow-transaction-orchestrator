@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Credit Card Number (Regex)</label>
+    <protected>false</protected>
+    <values>
+        <field>ComplianceCategory__c</field>
+        <value xsi:type="xsd:string">PCI-DSS</value>
+    </values>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">EXAMPLE RULE - Enable to use. Masks credit card numbers using regex pattern matching. Matches 13-19 digit sequences with optional spaces or dashes. Shows last 4 digits.</value>
+    </values>
+    <values>
+        <field>FieldApiName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>MaskingOptions__c</field>
+        <value xsi:type="xsd:string">{&quot;visibleChars&quot;: 4, &quot;position&quot;: &quot;end&quot;}</value>
+    </values>
+    <values>
+        <field>MaskingStrategy__c</field>
+        <value xsi:type="xsd:string">PARTIAL</value>
+    </values>
+    <values>
+        <field>MatchPattern__c</field>
+        <value xsi:type="xsd:string">\b(?:\d{4}[-\s]?){3}\d{1,7}\b</value>
+    </values>
+    <values>
+        <field>MatchType__c</field>
+        <value xsi:type="xsd:string">REGEX_PATTERN</value>
+    </values>
+    <values>
+        <field>SObjectType__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SortOrder__c</field>
+        <value xsi:type="xsd:double">30.0</value>
+    </values>
+</CustomMetadata>

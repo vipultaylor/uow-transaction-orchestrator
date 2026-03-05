@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OriginApiVersion__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Salesforce API version of the originating Apex class.</description>
+    <externalId>false</externalId>
+    <label>Origin API Version</label>
+    <length>10</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

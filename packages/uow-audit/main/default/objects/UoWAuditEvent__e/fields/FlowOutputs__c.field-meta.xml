@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FlowOutputs__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>JSON object with flow output variables. Work item events only (FLOW type).</description>
+    <isFilteringDisabled>false</isFilteringDisabled>
+    <isNameField>false</isNameField>
+    <isSortingDisabled>false</isSortingDisabled>
+    <label>Flow Outputs</label>
+    <length>10000</length>
+    <securityClassification>Internal</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>2</visibleLines>
+</CustomField>

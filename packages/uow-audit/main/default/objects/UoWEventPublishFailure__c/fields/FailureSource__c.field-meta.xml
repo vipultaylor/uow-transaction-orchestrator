@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FailureSource__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Source of the failure: BUSINESS_EVENT or AUDIT_EVENT</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Source of the failure: BUSINESS_EVENT or AUDIT_EVENT</inlineHelpText>
+    <label>Failure Source</label>
+    <length>30</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

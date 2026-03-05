@@ -1,0 +1,82 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <c-uow-page-section storage-key="origin-metadata">
+        <span slot="title">
+            Origin Source Metadata Snippet
+        </span>
+
+        <div slot="content">
+            <!-- Loading state -->
+            <template lwc:if={isLoading}>
+                <div class="slds-is-relative slds-p-around_medium">
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- No permission state -->
+            <template lwc:elseif={showNoPermission}>
+                <c-uow-empty-state
+                    icon-name="utility:lock"
+                    icon-variant="error"
+                    heading="No Access"
+                    body="You don't have permission to view origin source metadata.">
+                </c-uow-empty-state>
+            </template>
+
+            <!-- Error state -->
+            <template lwc:elseif={showError}>
+                <c-uow-empty-state
+                    icon-name="utility:error"
+                    icon-variant="error"
+                    heading="Error Loading Metadata"
+                    body={errorMessage}>
+                </c-uow-empty-state>
+            </template>
+
+            <!-- No metadata state -->
+            <template lwc:elseif={showNoMetadata}>
+                <c-uow-empty-state
+                    icon-name="utility:info"
+                    icon-variant="info"
+                    heading="No Metadata Recorded"
+                    body="Origin source metadata was not captured for this work item.">
+                </c-uow-empty-state>
+            </template>
+
+            <!-- Metadata display -->
+            <template lwc:elseif={showMetadata}>
+                <!-- Modification warning banner -->
+                <template lwc:if={hasCodeBeenModified}>
+                    <div class="slds-notify slds-notify_alert slds-theme_warning slds-m-bottom_small" role="alert">
+                        <span class="slds-assistive-text">Warning</span>
+                        <lightning-icon icon-name="utility:warning" variant="warning" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        <span>Source code has been modified since this audit record was created</span>
+                    </div>
+                </template>
+
+                <!-- Header with class info -->
+                <div class="slds-p-vertical_small">
+                    <div class="slds-grid slds-grid_vertical-align-center">
+                        <span class="slds-badge slds-badge_inverse">{metadataTypeDisplay}</span>
+                        <span class="slds-m-left_small slds-text-body_regular uow-class-name">{originLocationDisplay}</span>
+                        <template lwc:if={originLineNumber}>
+                            <span class="slds-m-left_small slds-text-color_weak">Line {originLineNumber}</span>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Code viewer using generic component -->
+                <c-uow-code-viewer
+                    code={sourceCode}
+                    language="java"
+                    start-line={codeStartLine}
+                    highlight-line={codeHighlightLine}
+                    max-height="500px">
+                </c-uow-code-viewer>
+            </template>
+        </div>
+    </c-uow-page-section>
+</template>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Precedence__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>DML execution precedence value. Lower values execute first. Example: Account=10, Contact=20 means Account DML executes before Contact when no explicit relate() relationship exists.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Execution order precedence (lower = earlier). Recommended ranges: 10-100 for parent objects, 100-500 for child objects, 500+ for junction/audit objects.</inlineHelpText>
+    <label>Precedence</label>
+    <precision>5</precision>
+    <required>true</required>
+    <scale>0</scale>
+    <securityClassification>Internal</securityClassification>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

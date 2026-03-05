@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExecutionContext__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Execution context type (SYNC, QUEUEABLE, BATCH, FUTURE, TRIGGER, etc.).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Execution context type (SYNC, QUEUEABLE, BATCH, FUTURE, TRIGGER, etc.).</inlineHelpText>
+    <label>Execution Context</label>
+    <length>50</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

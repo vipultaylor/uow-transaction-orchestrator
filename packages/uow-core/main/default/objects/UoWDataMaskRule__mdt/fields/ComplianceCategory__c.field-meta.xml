@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ComplianceCategory__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Compliance regulation category for this masking rule (e.g., GDPR, HIPAA, PCI-DSS, CCPA). Used for documentation and reporting purposes.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Optional. Comma-separated compliance categories (e.g., PII,GDPR,HIPAA). For documentation and reporting purposes only.</inlineHelpText>
+    <label>Compliance Category</label>
+    <length>255</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

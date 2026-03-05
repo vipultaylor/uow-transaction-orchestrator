@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DmlStrategyClassName__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Class Name that dictates the DML strategy while executing DMLs. Must extend UoWBaseDmlStrategy</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>DML Strategy Class Name</label>
+    <securityClassification>Internal</securityClassification>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CalloutSummary__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Summary of Callout work item execution status with executed/failure counts.</description>
+    <externalId>false</externalId>
+    <formula>IF(TotalCalloutsPlanned__c = 0,
+    &quot;&quot;,
+    IF(TotalCalloutsPlanned__c = TotalCalloutsProcessed__c &amp;&amp; TotalCalloutsExecuted__c = TotalCalloutsProcessed__c,
+        &quot;✅ &quot; &amp; TEXT(TotalCalloutsExecuted__c) &amp; &quot; executed&quot;,
+        IF(TotalCalloutsProcessed__c &gt; 0 &amp;&amp; TotalCalloutsExecuted__c = 0,
+            &quot;❌ &quot; &amp; TEXT(TotalCalloutsProcessed__c) &amp; &quot; failed&quot;,
+            IF(TotalCalloutsProcessed__c = 0,
+                &quot;⏸️ &quot; &amp; TEXT(TotalCalloutsPlanned__c) &amp; &quot; planned, not executed&quot;,
+                &quot;⚠️ &quot; &amp; TEXT(TotalCalloutsExecuted__c) &amp; &quot;/&quot; &amp; TEXT(TotalCalloutsPlanned__c) &amp; &quot; executed&quot; &amp;
+                IF(TotalCalloutsProcessed__c - TotalCalloutsExecuted__c &gt; 0,
+                    &quot; (&quot; &amp; TEXT(TotalCalloutsProcessed__c - TotalCalloutsExecuted__c) &amp; &quot; failed&quot; &amp;
+                    IF(TotalCalloutsPlanned__c - TotalCalloutsProcessed__c &gt; 0,
+                        &quot;, &quot; &amp; TEXT(TotalCalloutsPlanned__c - TotalCalloutsProcessed__c) &amp; &quot; not executed)&quot;,
+                        &quot;)&quot;
+                    ),
+                    IF(TotalCalloutsPlanned__c - TotalCalloutsProcessed__c &gt; 0,
+                        &quot; (&quot; &amp; TEXT(TotalCalloutsPlanned__c - TotalCalloutsProcessed__c) &amp; &quot; not executed)&quot;,
+                        &quot;&quot;
+                    )
+                )
+            )
+        )
+    )
+)</formula>
+    <inlineHelpText>Summary of Callout work item execution status.</inlineHelpText>
+    <label>Callout Summary</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

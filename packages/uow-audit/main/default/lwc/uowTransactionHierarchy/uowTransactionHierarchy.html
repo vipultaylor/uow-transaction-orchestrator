@@ -1,0 +1,97 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <!-- Loading Spinner -->
+    <template lwc:if={isLoading}>
+        <div class="slds-p-around_large slds-align_absolute-center">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <!-- Error Message -->
+    <template lwc:elseif={error}>
+        <c-uow-empty-state
+            icon-name="utility:error"
+            icon-variant="error"
+            heading="Error"
+            body={error}>
+        </c-uow-empty-state>
+    </template>
+
+    <!-- Hierarchy Table -->
+    <template lwc:elseif={hasHierarchy}>
+        <lightning-card title={title}>
+            <div class="slds-p-around_small slds-scrollable_y table-container">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout hierarchy-table">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Transaction Number">Transaction Number</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Description">Description</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Total Work Items">Total Work Items</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Status">Status</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={flattenedRows} for:item="row">
+                        <tr key={row.id} class={row.rowClass}>
+                            <td data-label="Transaction Number">
+                                <div class="slds-truncate" style={row.indentStyle}>
+                                    <template lwc:if={row.hasChildren}>
+                                        <button
+                                            type="button"
+                                            class="slds-button slds-button_icon slds-button_icon-x-small slds-m-right_x-small"
+                                            title="Toggle"
+                                            data-node-id={row.id}
+                                            onclick={handleToggle}>
+                                            <lightning-icon
+                                                icon-name={row.expandIcon}
+                                                size="xx-small"
+                                                alternative-text="Toggle">
+                                            </lightning-icon>
+                                        </button>
+                                    </template>
+                                    <a href="javascript:void(0);" data-record-id={row.id} onclick={handleNavigate}>
+                                        {row.transactionId}
+                                    </a>
+                                    <template lwc:if={row.isCurrentRecord}>
+                                        <span class="slds-badge slds-badge_lightest slds-m-left_x-small">current</span>
+                                    </template>
+                                </div>
+                            </td>
+                            <td data-label="Description">
+                                <div class="slds-truncate" title={row.description}>{row.description}</div>
+                            </td>
+                            <td data-label="Total Work Items">
+                                <div class="slds-truncate">{row.totalWorkCount}</div>
+                            </td>
+                            <td data-label="Status">
+                                <div class="slds-truncate">{row.statusLabel}</div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            </div>
+        </lightning-card>
+    </template>
+
+    <!-- Empty State -->
+    <template lwc:else>
+        <c-uow-empty-state
+            icon-name="utility:error"
+            icon-variant="error"
+            heading="No Hierarchy Available"
+            body="This transaction is not part of a correlation chain.">
+        </c-uow-empty-state>
+    </template>
+</template>

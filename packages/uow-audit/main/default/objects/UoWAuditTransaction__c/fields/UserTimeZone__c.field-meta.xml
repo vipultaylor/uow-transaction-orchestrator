@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UserTimeZone__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <complianceGroup>GDPR</complianceGroup>
+    <description>User&apos;s timezone setting (e.g., America/Los_Angeles).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>User&apos;s timezone setting (e.g., America/Los_Angeles).</inlineHelpText>
+    <label>User Time Zone</label>
+    <length>100</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

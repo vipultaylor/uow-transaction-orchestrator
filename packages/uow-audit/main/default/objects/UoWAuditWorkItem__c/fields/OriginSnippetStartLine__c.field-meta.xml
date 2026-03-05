@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OriginSnippetStartLine__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>The starting line number of the source code snippet stored in OriginSourceMetadata. Used to display correct line numbers in the code viewer.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The starting line number of the source code snippet stored in OriginSourceMetadata. Used to display correct line numbers in the code viewer.</inlineHelpText>
+    <label>Origin Snippet Start Line</label>
+    <precision>6</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

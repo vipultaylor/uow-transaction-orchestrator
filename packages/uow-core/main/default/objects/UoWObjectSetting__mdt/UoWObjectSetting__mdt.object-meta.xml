@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Object-specific settings for Unit of Work operations including audit, risk, and masking configuration</description>
+    <label>UoW Object Setting</label>
+    <pluralLabel>UoW Object Settings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

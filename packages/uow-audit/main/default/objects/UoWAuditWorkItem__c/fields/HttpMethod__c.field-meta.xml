@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HttpMethod__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>HTTP method for callout work items (GET, POST, PUT, DELETE, PATCH). Only populated for CALLOUT work type.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>HTTP method for callout work items (GET, POST, PUT, DELETE, PATCH). Only populated for CALLOUT work type.</inlineHelpText>
+    <label>HTTP Method</label>
+    <length>10</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

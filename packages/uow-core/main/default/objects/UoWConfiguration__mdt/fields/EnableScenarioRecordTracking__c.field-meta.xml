@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableScenarioRecordTracking__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <defaultValue>false</defaultValue>
+    <description>When enabled, the framework automatically creates and maintains UoWScenario__c records for each unique scenario name. This enables lookup relationships and scenario-based analytics. When disabled, only the text-based TransactionScenarioName__c field is populated.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Enable to automatically create UoWScenario__c records for scenarios and link them to audit transactions. Disable for lightweight text-only scenario tracking.</inlineHelpText>
+    <label>Enable Scenario Record Tracking</label>
+    <securityClassification>Internal</securityClassification>
+    <type>Checkbox</type>
+</CustomField>

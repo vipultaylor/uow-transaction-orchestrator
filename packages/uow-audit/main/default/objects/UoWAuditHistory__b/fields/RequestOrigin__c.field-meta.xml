@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RequestOrigin__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Origin of the work item request (class and method where registerXxx was called).</description>
+    <externalId>false</externalId>
+    <label>Request Origin</label>
+    <length>255</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

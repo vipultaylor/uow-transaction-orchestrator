@@ -1,0 +1,20 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/**
+ * Styles for UoW Metadata Viewer component.
+ * Uses SLDS tokens and UoW shared variables where possible.
+ */
+
+/* Import shared styles */
+@import 'c/uowSharedStylesModule';
+
+/* ============================================================================
+   HEADER STYLING
+   ============================================================================ */
+
+.uow-class-name {
+    font-family: var(--uow-font-mono, 'SF Mono', 'Consolas', 'Monaco', monospace);
+    font-weight: 500;
+}

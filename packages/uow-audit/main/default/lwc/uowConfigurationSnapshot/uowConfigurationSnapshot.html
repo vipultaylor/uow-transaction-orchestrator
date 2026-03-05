@@ -1,0 +1,67 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <lightning-quick-action-panel header={configTitle}>
+        <!-- Loading State -->
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative" style="min-height: 12rem">
+                <lightning-spinner variant="brand" alternative-text="Loading"></lightning-spinner>
+            </div>
+        </template>
+
+        <!-- Error State -->
+        <template lwc:if={hasError}>
+            <div class="slds-p-around_medium">
+                <div class="slds-illustration slds-illustration_small">
+                    <div class="slds-text-color_weak slds-text-align_center">
+                        <lightning-icon icon-name="utility:error" variant="error" size="large"></lightning-icon>
+                        <p class="slds-m-top_small">{errorMessage}</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Content -->
+        <template lwc:if={isLoaded}>
+            <c-uow-code-viewer
+                code={settingsJson}
+                language="json"
+                start-line="1"
+                max-height="50vh">
+            </c-uow-code-viewer>
+
+            <!-- Footer Actions -->
+            <div slot="footer" class="slds-grid slds-grid_align-end">
+                <lightning-button
+                    label="Download JSON"
+                    icon-name="utility:download"
+                    class="slds-m-right_small"
+                    onclick={handleDownload}>
+                </lightning-button>
+                <lightning-button-stateful
+                    data-id="copy-btn"
+                    label-when-off="Copy to Clipboard"
+                    label-when-on="Copied to Clipboard"
+                    icon-name-when-off="utility:copy_to_clipboard"
+                    icon-name-when-on="utility:check"
+                    variant={copyButtonVariant}
+                    selected={dataCopied}
+                    onclick={handleCopyToClipboard}>
+                </lightning-button-stateful>
+            </div>
+        </template>
+
+        <!-- No Settings State -->
+        <template lwc:if={isEmpty}>
+            <div class="slds-p-around_large slds-text-align_center">
+                <lightning-icon icon-name="utility:info" size="large" class="slds-m-bottom_small"></lightning-icon>
+                <p class="slds-text-heading_small">No Configuration Data</p>
+                <p class="slds-text-body_regular slds-text-color_weak">
+                    Configuration snapshot was not captured for this transaction.
+                </p>
+            </div>
+        </template>
+    </lightning-quick-action-panel>
+</template>

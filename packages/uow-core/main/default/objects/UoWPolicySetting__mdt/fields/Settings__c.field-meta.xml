@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Settings__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Policy-specific settings in JSON format (key-value pairs). Example: {&quot;riskThreshold&quot;: 75, &quot;requireApproval&quot;: true}</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Settings (JSON)</label>
+    <length>32768</length>
+    <securityClassification>Internal</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

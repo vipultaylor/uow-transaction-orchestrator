@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllConfigurations</fullName>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>EnableScenarioRecordTracking__c</columns>
+    <columns>EnableTracing__c</columns>
+    <columns>EnableMasking__c</columns>
+    <columns>EnableOriginSourceMetadata__c</columns>
+    <columns>RethrowTransactionExceptions__c</columns>
+    <columns>MinimumLoggingLevel__c</columns>
+    <columns>Description__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

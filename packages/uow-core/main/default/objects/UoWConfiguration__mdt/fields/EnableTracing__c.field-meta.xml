@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableTracing__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <defaultValue>false</defaultValue>
+    <description>Enable OpenTelemetry-compatible distributed tracing for performance monitoring and observability</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>When enabled, the framework captures detailed trace data (spans and events) following OpenTelemetry standards. Trace data can be exported to external APM tools (Datadog, New Relic, etc.)</inlineHelpText>
+    <label>Enable Tracing</label>
+    <securityClassification>Internal</securityClassification>
+    <type>Checkbox</type>
+</CustomField>

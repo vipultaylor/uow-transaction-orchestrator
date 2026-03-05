@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Platform event for UoW audit data. Uses EventType__c discriminator pattern to distinguish between TRANSACTION and OPERATION events. Consumed by UoWAuditEventHandler to create audit records.</description>
+    <eventType>HighVolume</eventType>
+    <label>Audit Event</label>
+    <pluralLabel>Audit Events</pluralLabel>
+    <publishBehavior>PublishAfterCommit</publishBehavior>
+</CustomObject>

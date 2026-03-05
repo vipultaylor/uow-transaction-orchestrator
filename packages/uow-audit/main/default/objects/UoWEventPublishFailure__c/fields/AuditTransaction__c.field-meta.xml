@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AuditTransaction__c</fullName>
+    <description>Related audit transaction. For business event failures: the audit transaction that recorded the UoW execution. For audit event failures: the tombstone transaction created by the failure callback.</description>
+    <label>Audit Transaction</label>
+    <referenceTo>UoWAuditTransaction__c</referenceTo>
+    <relationshipLabel>Event Publish Failures</relationshipLabel>
+    <relationshipName>EventPublishFailures</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>true</writeRequiresMasterRead>
+</CustomField>

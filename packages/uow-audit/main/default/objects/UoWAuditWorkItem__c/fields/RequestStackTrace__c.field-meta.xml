@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RequestStackTrace__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Stack trace captured when this work item was registered.</description>
+    <inlineHelpText>Stack trace captured when this work item was registered.</inlineHelpText>
+    <label>Request Stack Trace</label>
+    <length>32768</length>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

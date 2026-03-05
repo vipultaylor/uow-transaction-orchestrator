@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsAggregateQueries__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Aggregate Queries usage as percentage of transaction total. Shows warning (30%) and danger (50%) thresholds to identify resource-heavy work items.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISBLANK(LimitsAggregateQueriesConsumed__c) ||
+  ISBLANK(AuditTransaction__r.LimitsAggregateQueriesConsumed__c) ||
+  AuditTransaction__r.LimitsAggregateQueriesConsumed__c = 0,
+  &quot;N/A&quot;,
+  IF(LimitsAggregateQueriesConsumed__c / AuditTransaction__r.LimitsAggregateQueriesConsumed__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.AggregateQueries.WorkItemRedPercent__c / 100, &quot;⛔&quot;,
+    IF(LimitsAggregateQueriesConsumed__c / AuditTransaction__r.LimitsAggregateQueriesConsumed__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.AggregateQueries.WorkItemAmberPercent__c / 100, &quot;⚠️&quot;, &quot;✅&quot;)
+  )
+  &amp; &quot; &quot; &amp; TEXT(ROUND(LimitsAggregateQueriesConsumed__c / AuditTransaction__r.LimitsAggregateQueriesConsumed__c * 100, 1)) &amp; &quot;% of txn (&quot;
+  &amp; TEXT(LimitsAggregateQueriesConsumed__c) &amp; &quot; / &quot; &amp; TEXT(AuditTransaction__r.LimitsAggregateQueriesConsumed__c) &amp; &quot;)&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Aggregate Queries usage as percentage of transaction total. Shows warning (30%) and danger (50%) thresholds to identify resource-heavy work items.</inlineHelpText>
+    <label>Aggregate Queries</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

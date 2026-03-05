@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableMasking__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <defaultValue>false</defaultValue>
+    <description>Enable data masking for sensitive fields (PII, credit cards, etc.). When enabled, UoWMaskingService will apply masking rules configured in UoWDataMaskRule__mdt.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Enable Masking</label>
+    <securityClassification>Internal</securityClassification>
+    <type>Checkbox</type>
+</CustomField>

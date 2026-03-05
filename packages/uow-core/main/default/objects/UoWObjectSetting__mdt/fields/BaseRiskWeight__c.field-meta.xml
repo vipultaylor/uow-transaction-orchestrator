@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BaseRiskWeight__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <defaultValue>0.5</defaultValue>
+    <description>Base risk weight for this object type (0.0 - 1.0 scale)</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Base risk weight applied to all operations on this object. Scale: 0.0 (no risk) to 1.0 (critical risk). Default: 0.5</inlineHelpText>
+    <label>Base Risk Weight</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <securityClassification>Internal</securityClassification>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

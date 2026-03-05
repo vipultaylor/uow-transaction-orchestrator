@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>UoW_Error_AlreadyCommitted</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Already committed error</shortDescription>
+        <value>Unit of Work already committed. Create a new instance.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_ApprovalDenied</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Operation denied by approver</shortDescription>
+        <value>Operation denied by approver. Please contact your manager for more information.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_ApprovalRequired</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Approval required error</shortDescription>
+        <value>Approval required by policy or risk assessment. Transaction execution paused pending approval.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_ApprovalTimeout</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Approval request timeout</shortDescription>
+        <value>Approval request timed out. Please try again or contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_BlankValue</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Blank value error</shortDescription>
+        <value>{0} cannot be blank</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_CalloutFailed</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Callout Failed</shortDescription>
+        <value>Callout failed - code: {0}, message: {1}, body: {2}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_CircularDependency</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Circular dependency detected</shortDescription>
+        <value>Circular dependency detected in relationship graph. Please review your record relationships.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_ConfigNotFound</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Configuration not found</shortDescription>
+        <value>Configuration not found: {0}. Please contact your system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_DMLFailed</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>DML operation failed</shortDescription>
+        <value>DML operation failed: {0}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_DifferentRecordTypes</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Different Record Types</shortDescription>
+        <value>All the records in this registration must be of the same type. Please register them by separate SObjectTypes</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_EmptyValue</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Empty value error</shortDescription>
+        <value>{0} cannot be empty</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_GovernorLimit</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Governor limit exceeded</shortDescription>
+        <value>Governor limit threshold exceeded: {0}. Please reduce the number of records or operations.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_InvalidSObjectType</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid SObject type</shortDescription>
+        <value>Invalid SObject type: {0}. Please check the object name and try again.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_MixedDML</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Mixed DML error</shortDescription>
+        <value>Mixed DML operation not allowed: {0}. Setup and non-setup objects cannot be modified in the same transaction.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_NamedCredentialRequired</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Named credential required error</shortDescription>
+        <value>Named Credential is required for {0} approval integration. Please configure ApprovalNamedCredential__c in UoWConfiguration__mdt</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_NullValue</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Null value error</shortDescription>
+        <value>{0} cannot be null</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_PolicyDenied</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Operation denied by policy</shortDescription>
+        <value>Operation denied by policy: {0}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_SecurityViolation</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Security violation</shortDescription>
+        <value>Security violation: {0}. You do not have the required permissions.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Info_DataMasked</fullName>
+        <categories>UoW,Info</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data masked info</shortDescription>
+        <value>Sensitive data has been masked in {0} fields for security.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Info_PolicyWarning</fullName>
+        <categories>UoW,Info</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Policy warning info</shortDescription>
+        <value>Policy Warning: {0}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Info_RetryAttempt</fullName>
+        <categories>UoW,Info</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Retry attempt info</shortDescription>
+        <value>Retrying operation. Attempt {0} of {1}.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Message_ApprovalRequested</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Approval requested message</shortDescription>
+        <value>Approval request sent. You will be notified once the request is reviewed.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Message_ApprovalSummary</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Approval summary message</shortDescription>
+        <value>Approval required for UoW transaction {0}.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Message_ConfiguredClassIncorrect</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Configured class incorrect implementation</shortDescription>
+        <value>Configured class {0} does not implement {1}. Using default.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Message_FailedInstantiation</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Failed instantiation</shortDescription>
+        <value>Failed to instantiate {0} with class name {1}: {2}. Using default.&apos;</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Message_NoApprovalRequired</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No approval needed message</shortDescription>
+        <value>No approval required. Executing transaction synchronously.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_NonCriticalPolicyFailedEvaluation</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Non-critical Policy evaluation failed</shortDescription>
+        <value>Non-critical policy, {0}, failed during evaluation: {1}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_CriticalPolicyFailedEvaluation</fullName>
+        <categories>UoW,Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Critical Policy evaluation failed</shortDescription>
+        <value>CRITICAL POLICY FAILURE - {0} failed during evaluation: {1}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_NonCriticalPluginFailedExecution</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Non-critical Plugin execution failed</shortDescription>
+        <value>Non-critical plugin, {0}, failed during {1}: {2}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_CriticalPluginFailedExecution</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Critical Plugin execution failed</shortDescription>
+        <value>CRITICAL PLUGIN FAILURE - {0} failed during {1}: {2}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Message_TransactionQueued</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Transaction queued message</shortDescription>
+        <value>Transaction queued for asynchronous processing. Job ID: {0}</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Message_TransactionSuccess</fullName>
+        <categories>UoW,Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Transaction success message</shortDescription>
+        <value>Transaction completed successfully. {0} records processed.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_ExtDoesNotImplement</fullName>
+        <categories>UoW,Error,Extensibility</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Extensibility: Class does not implement interface</shortDescription>
+        <value>{0} class &quot;{1}&quot; does not implement {2}.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_ExtClassNotFound</fullName>
+        <categories>UoW,Error,Extensibility</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Extensibility: Class not found</shortDescription>
+        <value>{0} class &quot;{1}&quot; not found.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Error_ExtInstantiationFailed</fullName>
+        <categories>UoW,Error,Extensibility</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Extensibility: Instantiation failed</shortDescription>
+        <value>Failed to instantiate {0} &quot;{1}&quot;: {2}.</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_PluginsSkipped</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: Plugins skipped</shortDescription>
+        <value>Plugins - Result: SKIPPED (none configured)</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_PluginsExecuted</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: Plugins executed</shortDescription>
+        <value>Executed {0} plugin(s)</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_PluginsFailed</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: Plugins failed</shortDescription>
+        <value>Plugins - Result: FAILED ({0})</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_PhaseSkipped</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: Phase skipped</shortDescription>
+        <value>{0} - Result: SKIPPED (no work items)</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_PhaseCompleted</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: Phase completed</shortDescription>
+        <value>{0} - ({1} work items)</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_PhaseFailed</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: Phase failed</shortDescription>
+        <value>{0} - Result: FAILED ({1})</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_CalloutsCompleted</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: Callouts completed</shortDescription>
+        <value>Executed {0} callout(s)</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_DmlCompleted</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: DML completed</shortDescription>
+        <value>DML Execution - ({0} operations)</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_DmlPartialSuccess</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: DML partial success</shortDescription>
+        <value>DML Execution - Result: PARTIAL ({0} succeeded, {1} failed)</value>
+    </labels>
+    <labels>
+        <fullName>UoW_Span_ExceptionHandled</fullName>
+        <categories>UoW,Span</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Span: Exception handled</shortDescription>
+        <value>Exception handled - {0}</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,11 @@
+{
+  "orgName": "UoW Framework",
+  "edition": "Developer",
+  "description": "UoW Transaction Orchestrator Development Scratch Org",
+  "features": ["Einstein1AIPlatform"],
+  "settings": {
+    "einsteinGptSettings": {
+      "enableEinsteinGptPlatform": true
+    }
+  }
+}

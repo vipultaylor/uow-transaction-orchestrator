@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MaxAsyncDepth__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <defaultValue>1</defaultValue>
+    <description>Maximum async execution depth to prevent infinite queueable loops. When a transaction is enqueued via ASYNC mode, this controls how many levels deep async execution can go. Default: 1 (parent can enqueue child, but child cannot enqueue grandchild)</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Max Async Depth</label>
+    <securityClassification>Internal</securityClassification>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

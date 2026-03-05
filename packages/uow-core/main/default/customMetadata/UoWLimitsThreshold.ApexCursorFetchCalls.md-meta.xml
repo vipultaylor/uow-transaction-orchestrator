@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Apex Cursor Fetch Calls</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">Number of Database.Cursor fetch method calls. Platform limit varies by context.</value>
+    </values>
+    <values>
+        <field>TransactionAmberPercent__c</field>
+        <value xsi:type="xsd:double">80</value>
+    </values>
+    <values>
+        <field>TransactionRedPercent__c</field>
+        <value xsi:type="xsd:double">90</value>
+    </values>
+    <values>
+        <field>WorkItemAmberPercent__c</field>
+        <value xsi:type="xsd:double">30</value>
+    </values>
+    <values>
+        <field>WorkItemRedPercent__c</field>
+        <value xsi:type="xsd:double">50</value>
+    </values>
+</CustomMetadata>

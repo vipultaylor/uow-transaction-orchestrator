@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DmlOperation__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>For DML work items, the operation type (INSERT_OP, UPDATE_OP, DELETE_OP, UPSERT_OP, UNDELETE_OP).</description>
+    <externalId>false</externalId>
+    <label>DML Operation</label>
+    <length>20</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

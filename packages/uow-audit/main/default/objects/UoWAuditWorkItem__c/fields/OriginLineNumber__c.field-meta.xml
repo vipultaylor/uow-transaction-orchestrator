@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OriginLineNumber__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>The line number in the source code where the work item was registered. Extracted from the stack trace.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The line number in the source code where the work item was registered. Extracted from the stack trace.</inlineHelpText>
+    <label>Origin Line Number</label>
+    <precision>6</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

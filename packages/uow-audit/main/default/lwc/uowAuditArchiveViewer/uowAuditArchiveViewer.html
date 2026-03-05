@@ -1,0 +1,427 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <lightning-card title="UoW Audit Archives" icon-name="standard:record">
+        <!-- Header Actions -->
+        <div slot="actions" class="slds-grid slds-grid_align-end slds-grid_vertical-align-center">
+            <lightning-button-icon
+                icon-name={toggleFiltersIcon}
+                alternative-text={toggleFiltersLabel}
+                title={toggleFiltersLabel}
+                onclick={handleToggleFilters}
+                class="slds-m-right_small">
+            </lightning-button-icon>
+            <lightning-button-icon
+                icon-name="utility:refresh"
+                alternative-text="Refresh"
+                title="Refresh"
+                onclick={handleRefresh}
+                class="slds-m-right_small">
+            </lightning-button-icon>
+            <lightning-button-menu
+                alternative-text="Export"
+                icon-name="utility:download"
+                menu-alignment="right"
+                disabled={isExporting}>
+                <lightning-menu-item
+                    label="Export as JSON"
+                    value="json"
+                    onclick={handleExportJson}>
+                </lightning-menu-item>
+                <lightning-menu-item
+                    label="Export as CSV"
+                    value="csv"
+                    onclick={handleExportCsv}>
+                </lightning-menu-item>
+            </lightning-button-menu>
+        </div>
+
+        <div class="slds-grid">
+            <!-- Filter Panel -->
+            <template lwc:if={showFilters}>
+                <div class="filter-panel slds-size_1-of-4 slds-p-around_small slds-border_right">
+                    <h2 class="slds-text-heading_small slds-m-bottom_small">Filters</h2>
+
+                    <!-- Correlation ID -->
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <lightning-input
+                            type="text"
+                            label="Correlation ID"
+                            value={filterCorrelationId}
+                            onchange={handleCorrelationIdChange}
+                            placeholder="Enter correlation ID">
+                        </lightning-input>
+                    </div>
+
+                    <!-- Transaction ID -->
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <lightning-input
+                            type="text"
+                            label="Transaction ID"
+                            value={filterTransactionId}
+                            onchange={handleTransactionIdChange}
+                            placeholder="TXN-...">
+                        </lightning-input>
+                    </div>
+
+                    <!-- Date Range -->
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <lightning-input
+                            type="date"
+                            label="Start Date"
+                            value={filterStartDate}
+                            onchange={handleStartDateChange}>
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <lightning-input
+                            type="date"
+                            label="End Date"
+                            value={filterEndDate}
+                            onchange={handleEndDateChange}>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Work Type -->
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <lightning-dual-listbox
+                            label="Work Type"
+                            source-label="Available"
+                            selected-label="Selected"
+                            options={workTypeOptions}
+                            value={filterWorkTypes}
+                            onchange={handleWorkTypeChange}
+                            size="4">
+                        </lightning-dual-listbox>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <lightning-dual-listbox
+                            label="Status"
+                            source-label="Available"
+                            selected-label="Selected"
+                            options={statusOptions}
+                            value={filterStatuses}
+                            onchange={handleStatusChange}
+                            size="4">
+                        </lightning-dual-listbox>
+                    </div>
+
+                    <!-- Username -->
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <lightning-input
+                            type="text"
+                            label="Username"
+                            value={filterUsername}
+                            onchange={handleUsernameChange}
+                            placeholder="user@example.com">
+                        </lightning-input>
+                    </div>
+
+                    <!-- Agent Only Toggle -->
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <lightning-input
+                            type="checkbox"
+                            label="Agent Transactions Only"
+                            checked={filterAgentOnly}
+                            onchange={handleAgentOnlyChange}>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Filter Actions -->
+                    <div class="slds-grid slds-grid_align-spread">
+                        <lightning-button
+                            label="Clear"
+                            variant="neutral"
+                            onclick={handleClearFilters}>
+                        </lightning-button>
+                        <lightning-button
+                            label="Apply"
+                            variant="brand"
+                            onclick={handleApplyFilters}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Main Content -->
+            <div class={mainContentClass}>
+                <!-- Loading State -->
+                <template lwc:if={isLoading}>
+                    <div class="slds-is-relative loading-container">
+                        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                    </div>
+                </template>
+
+                <!-- Error State -->
+                <template lwc:elseif={hasError}>
+                    <div class="slds-illustration slds-illustration_small slds-p-around_large">
+                        <div class="slds-text-align_center">
+                            <lightning-icon icon-name="utility:error" variant="error" size="large"></lightning-icon>
+                            <p class="slds-text-color_error slds-m-top_medium">{error}</p>
+                            <lightning-button
+                                label="Retry"
+                                variant="brand"
+                                onclick={handleRefresh}
+                                class="slds-m-top_medium">
+                            </lightning-button>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Empty State -->
+                <template lwc:elseif={isEmpty}>
+                    <c-uow-empty-state
+                        title="No Archives Found"
+                        message="No archived audit records match your filter criteria. Try adjusting your filters or date range."
+                        icon-name="utility:archive">
+                    </c-uow-empty-state>
+                </template>
+
+                <!-- Data Table -->
+                <template lwc:else>
+                    <lightning-datatable
+                        key-field="CorrelationId__c"
+                        data={records}
+                        columns={columns}
+                        onrowaction={handleRowAction}
+                        onsort={handleSort}
+                        hide-checkbox-column
+                        show-row-number-column
+                        sorted-by={sortedBy}
+                        sorted-direction={sortedDirection}
+                        class="archive-table">
+                    </lightning-datatable>
+
+                    <!-- Pagination -->
+                    <div class="slds-grid slds-grid_align-spread slds-p-around_small pagination-bar">
+                        <div class="slds-grid slds-grid_vertical-align-center">
+                            <span class="slds-m-right_small">{pageInfo}</span>
+                            <lightning-combobox
+                                value={pageSize}
+                                options={pageSizeOptions}
+                                onchange={handlePageSizeChange}
+                                variant="label-hidden"
+                                class="page-size-picker">
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-button-group">
+                            <lightning-button
+                                label="Previous"
+                                icon-name="utility:chevronleft"
+                                disabled={isBackDisabled}
+                                onclick={handlePreviousPage}>
+                            </lightning-button>
+                            <lightning-button
+                                label="Next"
+                                icon-name="utility:chevronright"
+                                icon-position="right"
+                                disabled={isForwardDisabled}
+                                onclick={handleNextPage}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+
+    <!-- Detail Modal -->
+    <template lwc:if={showDetailModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-modal="true">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        alternative-text="Close"
+                        class="slds-modal__close"
+                        onclick={handleCloseModal}>
+                    </lightning-button-icon>
+                    <h2 class="slds-modal__title">Archive Record Details</h2>
+                    <p class="slds-m-top_x-small slds-text-color_weak">{selectedRecord.TransactionId__c}</p>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" style="max-height: 70vh; overflow-y: auto;">
+                    <template lwc:if={selectedRecord}>
+                        <!-- Identity Section -->
+                        <c-uow-page-section title="Identity" icon-name="utility:identity">
+                            <div slot="content" class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Transaction ID:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.TransactionId__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">Work ID:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.WorkId__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">Correlation ID:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.CorrelationId__c}</dd>
+                                    </dl>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Created:</dt>
+                                        <dd class="slds-dl_horizontal__detail">
+                                            <lightning-formatted-date-time value={selectedRecord.CreatedTimestamp__c}></lightning-formatted-date-time>
+                                        </dd>
+                                        <dt class="slds-dl_horizontal__label">Scenario:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.TransactionScenarioName__c}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </c-uow-page-section>
+
+                        <!-- Classification Section -->
+                        <c-uow-page-section title="Classification" icon-name="utility:custom_apps">
+                            <div slot="content" class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Work Type:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.WorkType__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">DML Operation:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.DmlOperation__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">SObject Type:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.SObjectType__c}</dd>
+                                    </dl>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Status:</dt>
+                                        <dd class="slds-dl_horizontal__detail">
+                                            <lightning-badge label={selectedRecord.TransactionStatus__c}></lightning-badge>
+                                        </dd>
+                                        <dt class="slds-dl_horizontal__label">Execution Phase:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.ExecutionPhase__c}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </c-uow-page-section>
+
+                        <!-- Metrics Section -->
+                        <c-uow-page-section title="Metrics" icon-name="utility:metrics">
+                            <div slot="content" class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-3 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Planned:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.PlannedCount__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">Processed:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.ProcessedCount__c}</dd>
+                                    </dl>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Success:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-text-color_success">{selectedRecord.SuccessCount__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">Failure:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-text-color_error">{selectedRecord.FailureCount__c}</dd>
+                                    </dl>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Duration:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.ExecutionTimeMs__c} ms</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </c-uow-page-section>
+
+                        <!-- User Context Section -->
+                        <c-uow-page-section title="User Context" icon-name="utility:user">
+                            <div slot="content" class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Username:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.Username__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">Profile:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.UserProfileName__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">Role:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.UserRoleName__c}</dd>
+                                    </dl>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">Login Type:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.LoginType__c}</dd>
+                                        <dt class="slds-dl_horizontal__label">Source IP:</dt>
+                                        <dd class="slds-dl_horizontal__detail">{selectedRecord.SourceIp__c}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </c-uow-page-section>
+
+                        <!-- Origin Section (if present) -->
+                        <template lwc:if={selectedRecord.OriginClassName__c}>
+                            <c-uow-page-section title="Origin" icon-name="utility:apex">
+                                <div slot="content" class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                        <dl class="slds-dl_horizontal">
+                                            <dt class="slds-dl_horizontal__label">Class:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.OriginClassName__c}</dd>
+                                            <dt class="slds-dl_horizontal__label">Method:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.OriginMethodName__c}</dd>
+                                            <dt class="slds-dl_horizontal__label">Line:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.OriginLineNumber__c}</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                        <dl class="slds-dl_horizontal">
+                                            <dt class="slds-dl_horizontal__label">Type:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.OriginMetadataType__c}</dd>
+                                            <dt class="slds-dl_horizontal__label">API Version:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.OriginApiVersion__c}</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </c-uow-page-section>
+                        </template>
+
+                        <!-- Agent Section (if present) -->
+                        <template lwc:if={selectedRecord.AgentName__c}>
+                            <c-uow-page-section title="Agent" icon-name="utility:einstein">
+                                <div slot="content" class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                        <dl class="slds-dl_horizontal">
+                                            <dt class="slds-dl_horizontal__label">Agent Name:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.AgentName__c}</dd>
+                                            <dt class="slds-dl_horizontal__label">Agent ID:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.AgentId__c}</dd>
+                                            <dt class="slds-dl_horizontal__label">Intent:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.AgentIntent__c}</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                        <dl class="slds-dl_horizontal">
+                                            <dt class="slds-dl_horizontal__label">Model ID:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.AgentModelId__c}</dd>
+                                            <dt class="slds-dl_horizontal__label">Confidence:</dt>
+                                            <dd class="slds-dl_horizontal__detail">{selectedRecord.AgentConfidenceScore__c}</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </c-uow-page-section>
+                        </template>
+
+                        <!-- Error Section (if present) -->
+                        <template lwc:if={selectedRecord.ErrorMessage__c}>
+                            <c-uow-page-section title="Errors" icon-name="utility:error" variant="error">
+                                <div slot="content" class="slds-p-around_small">
+                                    <p class="slds-text-color_error">{selectedRecord.ErrorMessage__c}</p>
+                                    <template lwc:if={selectedRecord.ErrorStackTrace__c}>
+                                        <pre class="slds-m-top_small error-stack">{selectedRecord.ErrorStackTrace__c}</pre>
+                                    </template>
+                                </div>
+                            </c-uow-page-section>
+                        </template>
+                    </template>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={handleCloseModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

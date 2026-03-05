@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsConsumed__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>JSON object with governor limits consumed by this work item. Work item events only.</description>
+    <isFilteringDisabled>false</isFilteringDisabled>
+    <isNameField>false</isNameField>
+    <isSortingDisabled>false</isSortingDisabled>
+    <label>Limits Consumed</label>
+    <length>1000</length>
+    <securityClassification>Internal</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>2</visibleLines>
+</CustomField>

@@ -1,0 +1,14 @@
+<apex:page standardController="UoWAuditTransaction__c"
+           recordSetVar="transactions"
+           extensions="UoWAuditTransactionDeleteExtension"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false"
+           lightningStylesheets="true"
+           docType="html-5.0"
+           title="Mass Delete Audit Transactions">
+
+    <apex:slds />
+
+    <c:uowDeleteConfirmation inputRecordIds="{!selectedIdList}"/>
+</apex:page>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CreatedTimestamp__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Timestamp when audit record was created. Part of compound index (position 3, DESC). Enables time-range queries.</description>
+    <label>Created Timestamp</label>
+    <required>true</required>
+    <securityClassification>Internal</securityClassification>
+    <type>DateTime</type>
+</CustomField>

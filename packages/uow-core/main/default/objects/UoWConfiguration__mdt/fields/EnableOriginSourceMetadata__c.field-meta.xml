@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableOriginSourceMetadata__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <defaultValue>false</defaultValue>
+    <description>Enable origin source metadata capture for audit records. When enabled, queries ApexClass metadata (API version, created/modified info) and extracts source code snippets around the origin line. Requires View All Data permission. Uses caching to minimize SOQL overhead.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Enable Origin Source Metadata</label>
+    <securityClassification>Internal</securityClassification>
+    <type>Checkbox</type>
+</CustomField>

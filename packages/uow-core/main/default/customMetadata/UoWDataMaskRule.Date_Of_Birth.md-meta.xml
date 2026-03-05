@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Date of Birth</label>
+    <protected>false</protected>
+    <values>
+        <field>ComplianceCategory__c</field>
+        <value xsi:type="xsd:string">PII,GDPR,HIPAA</value>
+    </values>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">EXAMPLE RULE - Enable to use. Masks Contact.Birthdate field. Full redaction (returns null).</value>
+    </values>
+    <values>
+        <field>FieldApiName__c</field>
+        <value xsi:type="xsd:string">Birthdate</value>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>MaskingOptions__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>MaskingStrategy__c</field>
+        <value xsi:type="xsd:string">REDACT</value>
+    </values>
+    <values>
+        <field>MatchPattern__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>MatchType__c</field>
+        <value xsi:type="xsd:string">EXACT_FIELD</value>
+    </values>
+    <values>
+        <field>SObjectType__c</field>
+        <value xsi:type="xsd:string">Contact</value>
+    </values>
+    <values>
+        <field>SortOrder__c</field>
+        <value xsi:type="xsd:double">10.0</value>
+    </values>
+</CustomMetadata>

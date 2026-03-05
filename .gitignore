@@ -1,0 +1,57 @@
+# Salesforce
+.sfdx/
+.localdevserver/
+.sf/
+.vscode/
+node_modules/
+*.log
+*.csv
+*.dat
+*.iml
+*.launch
+*.sublime-project
+*.sublime-workspace
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+.project
+.settings/
+.classpath
+salesforce.schema
+Referenced Packages/
+.sfdx-temp/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*~
+
+# IDE
+.idea/
+*.iws
+out/
+.vscode/settings.json
+.vscode/extensions.json
+
+# Scratch Orgs
+config/project-scratch-def.json.bak
+
+# Package Versions
+package-versions/
+
+# Test Results
+test-results/
+coverage/
+
+# Backup files
+*.backup
+*.md.backup
+
+# Temp
+temp/
+tmp/
+
+# AGENTS
+CLAUDE.md

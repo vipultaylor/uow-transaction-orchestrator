@@ -1,0 +1,108 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+:host {
+    /* ========================================================================
+       UOW CATEGORY COLORS - Work Types and Framework Concepts
+       These are UoW-specific semantic colors not available in SLDS.
+       For typography, spacing, borders - use SLDS tokens instead.
+       ======================================================================== */
+    --uow-category-framework: #7f8de1;
+    --uow-category-transaction: #455A64;
+    --uow-category-policy: #6366f1;
+    --uow-category-risk: #e4af0f;
+    --uow-category-plugin: #ec4899;
+    --uow-category-approval: #4fc3f7;
+    --uow-category-dml: #06a59a;
+    --uow-category-dependency: #8d6e63;
+    --uow-category-event: #3ba755;
+    --uow-category-callout: #ff9a3c;
+    --uow-category-email: #e287b2;
+    --uow-category-notification: #95a5a6;
+    --uow-category-flow: #34495e;
+    --uow-category-validation: #16a085;
+    --uow-category-security: #c0392b;
+    --uow-category-work_phase: #9b59b6;
+    --uow-category-finalization: #7f8c8d;
+    --uow-category-default: #706e6b;
+    --uow-category-milestone: #a094a5;
+    --uow-category-error: #e74c3c;
+    --uow-category-warning: #f1c40f;
+
+    /* ========================================================================
+       UOW SEVERITY COLORS - Logging Levels
+       Background (light) and text (dark) variants for message severity.
+       ======================================================================== */
+    --uow-severity-error-bg: #fef0ef;
+    --uow-severity-error-text: #c23934;
+    --uow-severity-warn-bg: #fff7e8;
+    --uow-severity-warn-text: #8c4b02;
+    --uow-severity-info-bg: #e7f4ff;
+    --uow-severity-info-text: #0176d3;
+    --uow-severity-debug-bg: #f3f3f3;
+    --uow-severity-debug-text: #706e6b;
+    --uow-severity-fine-bg: #f3f3f3;
+    --uow-severity-fine-text: #9e9e9e;
+
+    /* ========================================================================
+       UOW STATUS COLORS - Transaction Result States
+       ======================================================================== */
+    --uow-status-success: #2e844a;
+    --uow-status-success-bg: #e8f5e9;
+    --uow-status-warning: #ff9a3c;
+    --uow-status-warning-bg: #fff4e3;
+    --uow-status-error: #c23934;
+    --uow-status-error-bg: #fef0f0;
+
+    /* ========================================================================
+       UOW FEATURE COLORS - Specific Framework Features
+       ======================================================================== */
+    --uow-feature-masking: #9050e9;
+    --uow-feature-masking-bg: #f3e8ff;
+
+    /* ========================================================================
+       UOW COMPONENT TOKENS - Timeline-specific
+       ======================================================================== */
+    --uow-timeline-icon-color: #ffffff;
+
+    /* ========================================================================
+       UOW SHARED COMPONENT TOKENS - Harmonized across all components
+       These ensure visual consistency between Timeline, Messages, Config, etc.
+       ======================================================================== */
+
+    /* Badge - Unified badge styling for status indicators, severity, toggles */
+    --uow-badge-padding-y: 0.125rem;
+    --uow-badge-padding-x: 0.5rem;
+    --uow-badge-font-size: 0.6875rem;
+    --uow-badge-font-weight: 600;
+    --uow-badge-border-radius: 0.25rem;
+    --uow-badge-border-radius-pill: 9999px;
+
+    /* Section Header - Unified section header styling */
+    --uow-section-header-padding-y: 0.5rem;
+    --uow-section-header-padding-x: 0.75rem;
+    --uow-section-header-font-size: 0.75rem;
+    --uow-section-header-font-weight: 600;
+    --uow-section-header-bg: #f3f3f3;
+    --uow-section-header-color: #706e6b;
+
+    /* Row/Item - Unified row styling for lists and tables */
+    --uow-row-padding-y: 0.5rem;
+    --uow-row-padding-x: 0.75rem;
+    --uow-row-border-color: #f3f3f3;
+    --uow-row-hover-bg: #f3f3f3;
+
+    /* Content spacing */
+    --uow-content-padding: 0.75rem;
+    --uow-content-gap: 0.5rem;
+
+    /* Typography - Secondary/meta text */
+    --uow-text-secondary-color: #706e6b;
+    --uow-text-meta-color: #9e9e9e;
+    --uow-text-meta-size: 0.75rem;
+
+    /* Monospace - For technical content */
+    --uow-font-mono: 'SF Mono', 'Consolas', 'Monaco', monospace;
+
+}

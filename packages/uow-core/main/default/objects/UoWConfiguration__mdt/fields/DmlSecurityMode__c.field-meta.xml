@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DmlSecurityMode__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>ENFORCED - Strict enforcement with stripInaccessible
+PERMISSIVE - No enforcement (for system context, trusted operations)</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>ENFORCED - Strict enforcement with stripInaccessible
+PERMISSIVE - No enforcement (for system context, trusted operations)</inlineHelpText>
+    <label>DML Security Mode</label>
+    <securityClassification>Internal</securityClassification>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ENFORCED</fullName>
+                <default>true</default>
+                <label>ENFORCED</label>
+            </value>
+            <value>
+                <fullName>PERMISSIVE</fullName>
+                <default>false</default>
+                <label>PERMISSIVE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

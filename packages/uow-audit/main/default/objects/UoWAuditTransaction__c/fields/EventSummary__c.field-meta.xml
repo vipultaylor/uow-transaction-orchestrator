@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EventSummary__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Summary of Platform Event work item execution status with published/failure counts.</description>
+    <externalId>false</externalId>
+    <formula>IF(TotalEventsPlanned__c = 0,
+    &quot;&quot;,
+    IF(TotalEventsPlanned__c = TotalEventsProcessed__c &amp;&amp; TotalEventsPublished__c = TotalEventsProcessed__c,
+        &quot;✅ &quot; &amp; TEXT(TotalEventsPublished__c) &amp; &quot; published&quot;,
+        IF(TotalEventsProcessed__c &gt; 0 &amp;&amp; TotalEventsPublished__c = 0,
+            &quot;❌ &quot; &amp; TEXT(TotalEventsProcessed__c) &amp; &quot; failed&quot;,
+            IF(TotalEventsProcessed__c = 0,
+                &quot;⏸️ &quot; &amp; TEXT(TotalEventsPlanned__c) &amp; &quot; planned, not executed&quot;,
+                &quot;⚠️ &quot; &amp; TEXT(TotalEventsPublished__c) &amp; &quot;/&quot; &amp; TEXT(TotalEventsPlanned__c) &amp; &quot; published&quot; &amp;
+                IF(TotalEventsProcessed__c - TotalEventsPublished__c &gt; 0,
+                    &quot; (&quot; &amp; TEXT(TotalEventsProcessed__c - TotalEventsPublished__c) &amp; &quot; failed&quot; &amp;
+                    IF(TotalEventsPlanned__c - TotalEventsProcessed__c &gt; 0,
+                        &quot;, &quot; &amp; TEXT(TotalEventsPlanned__c - TotalEventsProcessed__c) &amp; &quot; not executed)&quot;,
+                        &quot;)&quot;
+                    ),
+                    IF(TotalEventsPlanned__c - TotalEventsProcessed__c &gt; 0,
+                        &quot; (&quot; &amp; TEXT(TotalEventsPlanned__c - TotalEventsProcessed__c) &amp; &quot; not executed)&quot;,
+                        &quot;&quot;
+                    )
+                )
+            )
+        )
+    )
+)</formula>
+    <inlineHelpText>Summary of Platform Event work item execution status.</inlineHelpText>
+    <label>Event Summary</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/**
+ * Styles for UoW Code Viewer component.
+ * Minimal overrides - let Prism handle most styling.
+ */
+
+/* Plain code fallback when Prism fails to load */
+.uow-plain-code {
+    margin: 0;
+    padding: 1rem;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: auto;
+    border-radius: 0.25rem;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExecutionPhase__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>For non-DML work items, the execution phase (PRE_DML, POST_DML, ON_SUCCESS, ON_FAILURE, ON_FINALIZATION).</description>
+    <externalId>false</externalId>
+    <label>Execution Phase</label>
+    <length>20</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

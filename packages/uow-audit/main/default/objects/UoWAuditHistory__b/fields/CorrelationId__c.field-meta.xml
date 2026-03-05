@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CorrelationId__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>UUID correlation ID for distributed tracing. Part of compound index (position 1). Links all work items from the same transaction across async boundaries.</description>
+    <externalId>false</externalId>
+    <label>Correlation ID</label>
+    <length>50</length>
+    <required>true</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

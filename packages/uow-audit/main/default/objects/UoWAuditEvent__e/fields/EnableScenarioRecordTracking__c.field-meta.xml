@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableScenarioRecordTracking__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Whether to create/update UoWScenario__c records and link them to audit transactions via lookup</description>
+    <isFilteringDisabled>false</isFilteringDisabled>
+    <isNameField>false</isNameField>
+    <isSortingDisabled>false</isSortingDisabled>
+    <label>Enable Scenario Record Tracking</label>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,22 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <li class="slds-timeline__item uow-span-event-item">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <lightning-icon
+                    icon-name={iconName}
+                    size="xx-small"
+                    class={eventTypeClass}>
+                </lightning-icon>
+            </div>
+            <div class="slds-media__body">
+                <p class="slds-text-body_small slds-text-color_weak">
+                    {name}
+                </p>
+            </div>
+        </div>
+    </li>
+</template>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Call the UoWAuditArchivalService.archiveTransactions method to archive the transactions to the Big Object</description>
+        <name>ArchiveTransactions</name>
+        <label>Archive Transactions</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>UoWAuditArchivalService</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>transactionIds</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>UoWAuditArchivalService</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>check for what archival mode is set on the audit transaction</description>
+        <name>CheckArchivalMode</name>
+        <label>Check Archival Mode</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomePurge</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ArchivalMode__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PURGE</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>PurgeTransactions</targetReference>
+            </connector>
+            <label>PURGE</label>
+        </rules>
+        <rules>
+            <name>OutcomeArchive</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ArchivalMode__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>ARCHIVE</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ArchiveTransactions</targetReference>
+            </connector>
+            <label>ARCHIVE</label>
+        </rules>
+    </decisions>
+    <description>Scheduled Flow that runs daily at 2 AM to process audit records ready for archival.
+- Queries transactions where IsArchivable__c = true
+- PURGE mode: Deletes transactions directly (cascade delete handles work items)
+- ARCHIVE mode: Calls UoWAuditArchivalService to copy to Big Object then delete</description>
+    <environments>Default</environments>
+    <interviewLabel>UoWAudit Transaction ArchivalJob {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>UoW: Audit Transaction - Archival Job</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordDeletes>
+        <name>PurgeTransactions</name>
+        <label>Purge Transactions</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputReference>$Record</inputReference>
+    </recordDeletes>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>CheckArchivalMode</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsArchivable__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>UoWAuditTransaction__c</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2026-01-07</startDate>
+            <startTime>02:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

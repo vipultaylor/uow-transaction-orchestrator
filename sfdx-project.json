@@ -1,0 +1,35 @@
+{
+  "packageDirectories": [
+    {
+      "versionName": "ver 1.0",
+      "versionNumber": "1.0.0.NEXT",
+      "path": "packages/uow-core",
+      "default": false,
+      "package": "UoW Core",
+      "versionDescription": ""
+    },
+    {
+      "versionName": "ver 1.0",
+      "versionNumber": "1.0.0.NEXT",
+      "path": "packages/uow-audit",
+      "default": true,
+      "package": "UoW Audit",
+      "versionDescription": "",
+      "dependencies": [
+        {
+          "package": "UoW Core@1.0.0-1"
+        }
+      ]
+    }
+  ],
+  "name": "uow-transaction-orchestrator",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "65.0",
+  "packageAliases": {
+    "UoW Core": "0HoJ5000000TN28KAG",
+    "UoW Audit": "0HoJ5000000TN2DKAW",
+    "UoW Core@1.0.0-1": "04tJ5000000HHajIAG",
+    "UoW Audit@1.0.0-1": "04tJ5000000HHaoIAG"
+  }
+}

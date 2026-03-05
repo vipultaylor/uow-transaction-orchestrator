@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FailureSource__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Source of failure when this record is a tombstone. Null for normal work item records. Values: AUDIT_EVENT. Tombstone records use Sequence__c = 0 as a sentinel value.</description>
+    <externalId>false</externalId>
+    <label>Failure Source</label>
+    <length>30</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

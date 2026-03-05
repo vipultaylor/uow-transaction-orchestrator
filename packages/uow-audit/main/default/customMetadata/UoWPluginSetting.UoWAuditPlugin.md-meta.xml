@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>UoW Audit Plugin</label>
+    <protected>false</protected>
+    <values>
+        <field>Configuration__c</field>
+        <value xsi:type="xsd:string">UoWDefault</value>
+    </values>
+    <values>
+        <field>ExecutionOrder__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>IsEnabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>PluginClassName__c</field>
+        <value xsi:type="xsd:string">UoWAuditPlugin</value>
+    </values>
+    <values>
+        <field>Settings__c</field>
+        <value xsi:type="xsd:string">{&quot;storageMode&quot;:&quot;CUSTOM_OBJECT&quot;,&quot;retentionDays&quot;:30,&quot;archivalMode&quot;:&quot;ARCHIVE&quot;}</value>
+    </values>
+</CustomMetadata>

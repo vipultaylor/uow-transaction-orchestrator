@@ -1,0 +1,56 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/* uowSnapshotItems.css - Snapshot items display styling
+   SLDS-first approach with minimal custom CSS */
+@import 'c/uowSharedStylesModule';
+
+/* ============================================================================
+   ROW HEADER - Clickable area
+   ============================================================================ */
+
+.uow-row-header {
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+}
+
+.uow-row-header:hover {
+    background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
+}
+
+/* ============================================================================
+   STATUS BADGES - Success/Failure coloring
+   ============================================================================ */
+
+.uow-badge-success {
+    --slds-c-badge-color-background: var(--uow-status-success-light, #c8f7c5);
+    --slds-c-badge-text-color: var(--uow-status-success, #2e844a);
+}
+
+.uow-badge-error {
+    --slds-c-badge-color-background: var(--uow-status-error-light, #fdd);
+    --slds-c-badge-text-color: var(--uow-status-error, #c23934);
+}
+
+/* ============================================================================
+   RECORD LINK - Navigatable record ID
+   ============================================================================ */
+
+.uow-record-link {
+    font-family: var(--uow-font-mono, ui-monospace, SFMono-Regular, monospace);
+    font-size: var(--slds-g-font-scale-neg-1, 0.75rem);
+    text-decoration: none;
+}
+
+.uow-record-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   FIELD VALUES - Monospace for data
+   ============================================================================ */
+
+.uow-field-value {
+    font-family: var(--uow-font-mono, ui-monospace, SFMono-Regular, monospace);
+}

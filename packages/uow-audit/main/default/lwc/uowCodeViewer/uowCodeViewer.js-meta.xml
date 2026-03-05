@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>UoW: Code Viewer</masterLabel>
+    <description>Generic code viewer component with Prism.js syntax highlighting. Used internally by other UoW audit components.</description>
+</LightningComponentBundle>

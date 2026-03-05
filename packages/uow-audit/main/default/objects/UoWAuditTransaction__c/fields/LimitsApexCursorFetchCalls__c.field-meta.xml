@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsApexCursorFetchCalls__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Apex Cursor Fetch Calls usage with visual indicator. Shows percentage of limit consumed with warning (80%) and danger (90%) thresholds.</description>
+    <externalId>false</externalId>
+    <formula>IF(LimitsApexCursorFetchCallsMax__c = 0, &quot;✅ N/A&quot;,
+  IF(LimitsApexCursorFetchCallsConsumed__c / LimitsApexCursorFetchCallsMax__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.ApexCursorFetchCalls.TransactionRedPercent__c / 100, &quot;⛔&quot;,
+    IF(LimitsApexCursorFetchCallsConsumed__c / LimitsApexCursorFetchCallsMax__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.ApexCursorFetchCalls.TransactionAmberPercent__c / 100, &quot;⚠️&quot;, &quot;✅&quot;)
+  )
+  &amp; &quot; &quot; &amp; TEXT(ROUND(LimitsApexCursorFetchCallsConsumed__c / LimitsApexCursorFetchCallsMax__c * 100, 1)) &amp; &quot;% (&quot;
+  &amp; TEXT(LimitsApexCursorFetchCallsConsumed__c) &amp; &quot; / &quot; &amp; TEXT(LimitsApexCursorFetchCallsMax__c) &amp; &quot;)&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Apex Cursor Fetch Calls usage with visual indicator. Shows percentage of limit consumed with warning (80%) and danger (90%) thresholds.</inlineHelpText>
+    <label>Apex Cursor Fetch Calls</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

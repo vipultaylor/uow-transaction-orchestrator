@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TransactionStatus__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Final status of the transaction (SUCCESS, PARTIAL_SUCCESS, FAILED, ROLLED_BACK, etc.). Denormalized from transaction for self-contained queries.</description>
+    <externalId>false</externalId>
+    <label>Transaction Status</label>
+    <length>30</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

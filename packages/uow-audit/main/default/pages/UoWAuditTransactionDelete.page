@@ -1,0 +1,13 @@
+<apex:page standardController="UoWAuditTransaction__c"
+           extensions="UoWAuditTransactionDeleteExtension"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false"
+           lightningStylesheets="true"
+           docType="html-5.0"
+           title="Delete Audit Transaction">
+
+    <apex:slds />
+
+    <c:uowDeleteConfirmation inputRecordIds="{!selectedIdList}"/>
+</apex:page>

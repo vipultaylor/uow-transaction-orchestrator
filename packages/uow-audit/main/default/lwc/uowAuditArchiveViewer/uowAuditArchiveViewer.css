@@ -1,0 +1,142 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/* uowAuditArchiveViewer.css - Styling for archive viewer component */
+@import 'c/uowSharedStylesModule';
+
+/* Filter Panel */
+.filter-panel {
+    background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
+    min-width: 280px;
+    max-width: 320px;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    min-height: 400px;
+}
+
+.main-content-full {
+    width: 100%;
+    min-height: 400px;
+}
+
+/* Loading Container */
+.loading-container {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Datatable Styling */
+.archive-table {
+    min-height: 200px;
+}
+
+/* Work Type Colors */
+.work-type-dml {
+    color: var(--uow-g-dml-color, #0176d3);
+    font-weight: 600;
+}
+
+.work-type-event {
+    color: var(--uow-g-event-color, #9050e9);
+    font-weight: 600;
+}
+
+.work-type-flow {
+    color: var(--uow-g-flow-color, #06a59a);
+    font-weight: 600;
+}
+
+.work-type-email {
+    color: var(--uow-g-email-color, #f88962);
+    font-weight: 600;
+}
+
+.work-type-notification {
+    color: var(--uow-g-notification-color, #fcc003);
+    font-weight: 600;
+}
+
+.work-type-callout {
+    color: var(--uow-g-callout-color, #1b96ff);
+    font-weight: 600;
+}
+
+/* Status Colors */
+.status-success {
+    color: var(--uow-g-status-success, #2e844a);
+    font-weight: 600;
+}
+
+.status-warning {
+    color: var(--uow-g-status-warning, #dd7a01);
+    font-weight: 600;
+}
+
+.status-error {
+    color: var(--uow-g-status-error, #ba0517);
+    font-weight: 600;
+}
+
+/* Risk Level Colors */
+.risk-critical {
+    color: #8e030f;
+    font-weight: 700;
+}
+
+.risk-high {
+    color: var(--uow-g-status-error, #ba0517);
+    font-weight: 600;
+}
+
+.risk-medium {
+    color: var(--uow-g-status-warning, #dd7a01);
+    font-weight: 600;
+}
+
+.risk-low {
+    color: var(--slds-g-color-neutral-base-50, #747474);
+    font-weight: 500;
+}
+
+.risk-none {
+    color: var(--uow-g-status-success, #2e844a);
+    font-weight: 500;
+}
+
+/* Pagination Bar */
+.pagination-bar {
+    background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
+    border-top: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+
+.page-size-picker {
+    width: 140px;
+}
+
+/* Modal Styling */
+.error-stack {
+    background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
+    padding: var(--slds-g-spacing-3, 0.75rem);
+    border-radius: var(--slds-g-radius-border-2, 0.25rem);
+    font-family: var(--slds-g-font-family-monospace, monospace);
+    font-size: var(--slds-g-font-scale-neg-1, 0.8125rem);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Description List Styling */
+.slds-dl_horizontal__label {
+    color: var(--slds-g-color-neutral-base-30, #706e6b);
+    font-weight: 400;
+}
+
+.slds-dl_horizontal__detail {
+    font-weight: 500;
+}

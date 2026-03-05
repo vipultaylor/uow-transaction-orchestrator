@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RethrowTransactionExceptions__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <defaultValue>false</defaultValue>
+    <description>When true, exceptions are re-thrown at the end of commitWork() if transaction fails.
+When false (default), exceptions are captured in result and transaction completes gracefully.
+
+Use Cases:
+- TRUE: Integration scenarios where caller needs to catch exceptions for retry logic
+- TRUE: Testing scenarios where Transaction Finalizer needs exception propagation
+- FALSE: Async scenarios where graceful completion allows Transaction Finalizer to handle errors via result
+- FALSE: User-facing transactions where result-based error handling is preferred</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Re-throw exceptions on transaction failure? Default: false (graceful completion with result.transactionStatus = FAILED/ROLLED_BACK)</inlineHelpText>
+    <label>Re-throw Transaction Exceptions</label>
+    <securityClassification>Internal</securityClassification>
+    <type>Checkbox</type>
+</CustomField>

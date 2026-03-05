@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AuditSampleSize__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <defaultValue>5</defaultValue>
+    <description>Number of records to capture in audit snapshot</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Maximum number of records to include in audit snapshot. Default: 5. Increase for more detail, decrease for large operations.</inlineHelpText>
+    <label>Audit Sample Size</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <securityClassification>Internal</securityClassification>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

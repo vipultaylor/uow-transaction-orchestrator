@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Data type hint for the parameter value. Used by UoWParameterUtil accessor class for type-safe casting.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Type</label>
+    <required>true</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Boolean</fullName>
+                <default>false</default>
+                <label>Boolean</label>
+            </value>
+            <value>
+                <fullName>Integer</fullName>
+                <default>false</default>
+                <label>Integer</label>
+            </value>
+            <value>
+                <fullName>Decimal</fullName>
+                <default>false</default>
+                <label>Decimal</label>
+            </value>
+            <value>
+                <fullName>String</fullName>
+                <default>true</default>
+                <label>String</label>
+            </value>
+            <value>
+                <fullName>StringList</fullName>
+                <default>false</default>
+                <label>String List</label>
+            </value>
+            <value>
+                <fullName>IntegerList</fullName>
+                <default>false</default>
+                <label>Integer List</label>
+            </value>
+            <value>
+                <fullName>Json</fullName>
+                <default>false</default>
+                <label>JSON</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConfigurationSnapshot__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>JSON snapshot of UoW configuration at transaction execution time.</description>
+    <inlineHelpText>JSON snapshot of UoW configuration at transaction execution time.</inlineHelpText>
+    <label>Configuration Snapshot</label>
+    <length>32768</length>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,147 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <lightning-card>
+        <!-- Loading State -->
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-around_large">
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+        </template>
+
+        <!-- Error State -->
+        <template lwc:elseif={hasError}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <h2>{errorMessage}</h2>
+                </div>
+            </div>
+        </template>
+
+        <!-- Empty State -->
+        <template lwc:elseif={hasNoSnapshots}>
+            <c-uow-empty-state
+                icon-name="utility:preview"
+                heading="No Snapshot Items"
+                body="This work item does not contain snapshot data.">
+            </c-uow-empty-state>
+        </template>
+
+        <!-- Main Content -->
+        <template lwc:elseif={hasSnapshots}>
+            <!-- Header -->
+            <div class="slds-p-horizontal_small slds-p-vertical_x-small slds-border_bottom" slot="title">
+                <div class="slds-media slds-media_center">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="utility:rows" size="small"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">{headerTitle}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Items List -->
+            <ul class="slds-has-dividers_bottom-space">
+                <template for:each={displaySnapshots} for:item="snap">
+                    <li key={snap.key} class={snap.rowClass}>
+
+                        <!-- Row Header (Clickable) -->
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_x-small uow-row-header"
+                             data-index={snap.rowIndex}
+                             onclick={handleToggleRow}>
+
+                            <!-- Expand Icon -->
+                            <lightning-icon
+                                icon-name={snap.expandIcon}
+                                size="x-small"
+                                class="slds-m-right_x-small">
+                            </lightning-icon>
+
+                            <!-- Status Badge -->
+                            <lightning-badge
+                                label={snap.statusLabel}
+                                class={snap.badgeClass}>
+                            </lightning-badge>
+
+                            <!-- Index -->
+                            <span class="slds-m-horizontal_x-small slds-text-color_weak slds-text-body_small">
+                                #{snap.idx}
+                            </span>
+
+                            <!-- Record ID (if present) -->
+                            <template lwc:if={snap.hasRecordId}>
+                                <a href="#"
+                                   class="slds-m-right_x-small uow-record-link"
+                                   data-record-id={snap.rid}
+                                   title={snap.rid}
+                                   onclick={handleNavigateToRecord}>
+                                    {snap.ridShort}
+                                </a>
+                            </template>
+                            <template lwc:else>
+                                <span class="slds-m-right_x-small slds-text-color_weak">—</span>
+                            </template>
+
+                            <!-- Preview Text -->
+                            <span class="slds-truncate slds-text-body_small" title={snap.previewFull}>
+                                {snap.preview}
+                            </span>
+                        </div>
+
+                        <!-- Expanded Detail Panel -->
+                        <template lwc:if={snap.isExpanded}>
+                            <div class="slds-p-around_small slds-m-left_large slds-box slds-box_x-small slds-theme_shade">
+
+                                <!-- Fields Section -->
+                                <div class="slds-text-title_caps slds-m-bottom_x-small">Fields</div>
+                                <dl class="slds-dl_horizontal slds-dl_horizontal-small">
+                                    <template for:each={snap.fields} for:item="field">
+                                        <dt key={field.keyDt} class="slds-dl_horizontal__label">
+                                            <span class="slds-truncate" title={field.name}>{field.name}</span>
+                                        </dt>
+                                        <dd key={field.keyDd} class="slds-dl_horizontal__detail uow-field-value" title={field.rawValue}>
+                                            {field.displayValue}
+                                        </dd>
+                                    </template>
+                                </dl>
+
+                                <!-- Errors Section (if failed) -->
+                                <template lwc:if={snap.hasErrors}>
+                                    <div class="slds-text-title_caps slds-m-top_small slds-m-bottom_x-small">Errors</div>
+                                    <template for:each={snap.displayErrors} for:item="err">
+                                        <div key={err.key} class="slds-text-color_error slds-m-bottom_xx-small">
+                                            <p class="slds-text-body_small">
+                                                <strong>[{err.code}]</strong> {err.msg}
+                                            </p>
+                                            <template lwc:if={err.hasFields}>
+                                                <p class="slds-text-body_small">
+                                                    Fields: {err.fieldsDisplay}
+                                                </p>
+                                            </template>
+                                            <template lwc:if={err.hasTargetId}>
+                                                <p class="slds-text-body_small">
+                                                    Target: {err.tid}
+                                                </p>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </template>
+
+                                <!-- Upsert Created indicator (DML only) -->
+                                <template lwc:if={snap.showCreated}>
+                                    <div class="slds-m-top_small">
+                                        <lightning-badge label={snap.createdLabel}></lightning-badge>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </li>
+                </template>
+            </ul>
+        </template>
+    </lightning-card>
+</template>

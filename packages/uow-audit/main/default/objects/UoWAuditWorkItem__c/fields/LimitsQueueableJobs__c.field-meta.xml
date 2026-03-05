@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsQueueableJobs__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Queueable Jobs usage as percentage of transaction total. Shows warning (30%) and danger (50%) thresholds to identify resource-heavy work items.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISBLANK(LimitsQueueableJobsConsumed__c) ||
+  ISBLANK(AuditTransaction__r.LimitsQueueableJobsConsumed__c) ||
+  AuditTransaction__r.LimitsQueueableJobsConsumed__c = 0,
+  &quot;N/A&quot;,
+  IF(LimitsQueueableJobsConsumed__c / AuditTransaction__r.LimitsQueueableJobsConsumed__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.QueueableJobs.WorkItemRedPercent__c / 100, &quot;⛔&quot;,
+    IF(LimitsQueueableJobsConsumed__c / AuditTransaction__r.LimitsQueueableJobsConsumed__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.QueueableJobs.WorkItemAmberPercent__c / 100, &quot;⚠️&quot;, &quot;✅&quot;)
+  )
+  &amp; &quot; &quot; &amp; TEXT(ROUND(LimitsQueueableJobsConsumed__c / AuditTransaction__r.LimitsQueueableJobsConsumed__c * 100, 1)) &amp; &quot;% of txn (&quot;
+  &amp; TEXT(LimitsQueueableJobsConsumed__c) &amp; &quot; / &quot; &amp; TEXT(AuditTransaction__r.LimitsQueueableJobsConsumed__c) &amp; &quot;)&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Queueable Jobs usage as percentage of transaction total. Shows warning (30%) and danger (50%) thresholds to identify resource-heavy work items.</inlineHelpText>
+    <label>Queueable Jobs</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ErrorDetails__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>JSON containing detailed error information including field-level errors and DML results.</description>
+    <label>Error Details</label>
+    <length>131072</length>
+    <securityClassification>Internal</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EventPublishFailureHandlerClassName__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Event Publish Failure Handler class name (implements IEventPublishFailureHandler).
+Called asynchronously in a separate transaction when platform events fail to deliver after commit.
+Optional - if not specified, failures are logged via System.debug only.
+The audit package provides UoWEventPublishFailureHandler as a default implementation.
+Example: UoWEventPublishFailureHandler</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Event Publish Failure Handler class name (implements IEventPublishFailureHandler).
+Optional - if not specified, failures are logged only.</inlineHelpText>
+    <label>Event Publish Failure Handler Class Name</label>
+    <length>255</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

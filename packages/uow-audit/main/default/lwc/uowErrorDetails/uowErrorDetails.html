@@ -1,0 +1,225 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <lightning-card>
+        <!-- Error State -->
+        <template lwc:if={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <h2>Error loading error details</h2>
+                </div>
+            </div>
+        </template>
+
+        <!-- Main Content -->
+        <template lwc:else>
+            <!-- Empty State -->
+            <template lwc:if={hasNoErrors}>
+                <c-uow-empty-state
+                    icon-name="utility:success"
+                    icon-variant="success"
+                    heading="No Errors"
+                    body="No errors were recorded.">
+                </c-uow-empty-state>
+            </template>
+
+            <!-- Errors List -->
+            <template lwc:elseif={hasErrors}>
+                <!-- Header / Title -->
+                <div class="slds-media" slot="title">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="utility:error" size="small" variant="error"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h3>{headerTitle}</h3>
+                    </div>
+                </div>
+
+                <div class="uow-errors-list">
+                    <template for:each={displayErrors} for:item="err">
+                        <div key={err.key} class="uow-error-row">
+                            <!-- Error Header (Clickable) -->
+                            <div class="uow-error-header" data-index={err.index} onclick={handleToggleError}>
+                                <!-- Expand/Collapse Icon -->
+                                <lightning-icon
+                                    icon-name={err.expandIcon}
+                                    size="x-small"
+                                    class="uow-expand-icon"
+                                    alternative-text="Toggle">
+                                </lightning-icon>
+
+                                <!-- Error Type Badge -->
+                                <span class="uow-error-type-badge">{err.errorType}</span>
+
+                                <!-- Error Message Preview -->
+                                <span class="uow-error-message-preview" title={err.errorMessage}>
+                                    {err.errorMessagePreview}
+                                </span>
+
+                                <!-- Metadata Indicators -->
+                                <div class="uow-error-indicators">
+                                    <template lwc:if={err.isRetryable}>
+                                        <span class="uow-indicator uow-indicator--retryable" title="Retryable">
+                                            <lightning-icon icon-name="utility:refresh" size="xx-small" alternative-text="Retryable"></lightning-icon>
+                                        </span>
+                                    </template>
+                                    <template lwc:if={err.hasAttempts}>
+                                        <span class="uow-indicator uow-indicator--attempt" title={err.attemptTitle}>
+                                            #{err.attemptNumber}
+                                        </span>
+                                    </template>
+                                </div>
+
+                                <!-- Timestamp -->
+                                <span class="uow-error-timestamp">{err.formattedTime}</span>
+
+                                <!-- Error ID (truncated) -->
+                                <span class="uow-error-id" title={err.errorId}>{err.errorIdShort}</span>
+
+                                <!-- Work Item Link (hidden when on work item page) -->
+                                <template lwc:if={err.showWorkItem}>
+                                    <template lwc:if={err.hasWorkItemLink}>
+                                        <a href="#"
+                                        class="uow-work-item-link"
+                                        data-record-id={err.workItemRecordId}
+                                        title={err.workItemId}
+                                        onclick={handleNavigateToWorkItem}>
+                                            {err.workItemIdShort}
+                                        </a>
+                                    </template>
+                                    <template lwc:else>
+                                        <span class="uow-work-item-id slds-text-color_weak" title={err.workItemId}>
+                                            {err.workItemIdShort}
+                                        </span>
+                                    </template>
+                                </template>
+                            </div>
+
+                            <!-- Error Detail Panel (Expandable) -->
+                            <template lwc:if={err.isExpanded}>
+                                <div class="uow-error-detail-panel">
+                                    <!-- Full Error Message -->
+                                    <div class="uow-detail-section">
+                                        <div class="uow-detail-label">Error Message</div>
+                                        <div class="uow-detail-value uow-error-message-full">{err.errorMessage}</div>
+                                    </div>
+
+                                    <!-- Stack Trace (if present) -->
+                                    <template lwc:if={err.hasStackTrace}>
+                                        <div class="uow-detail-section">
+                                            <div class="uow-detail-header" data-index={err.index} onclick={handleToggleStackTrace}>
+                                                <lightning-icon
+                                                    icon-name={err.stackTraceExpandIcon}
+                                                    size="xx-small"
+                                                    class="slds-m-right_xx-small"
+                                                    alternative-text="Toggle">
+                                                </lightning-icon>
+                                                <span class="uow-detail-label">Stack Trace</span>
+                                            </div>
+                                            <template lwc:if={err.showStackTrace}>
+                                                <pre class="uow-stack-trace">{err.stackTrace}</pre>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <!-- Error Context (if present) -->
+                                    <template lwc:if={err.hasErrorContext}>
+                                        <div class="uow-detail-section">
+                                            <div class="uow-detail-header" data-index={err.index} onclick={handleToggleContext}>
+                                                <lightning-icon
+                                                    icon-name={err.contextExpandIcon}
+                                                    size="xx-small"
+                                                    class="slds-m-right_xx-small"
+                                                    alternative-text="Toggle">
+                                                </lightning-icon>
+                                                <span class="uow-detail-label">Error Context</span>
+                                            </div>
+                                            <template lwc:if={err.showErrorContext}>
+                                                <pre class="uow-error-context">{err.errorContextFormatted}</pre>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <!-- Metadata Grid -->
+                                    <div class="uow-metadata-grid">
+                                        <div class="uow-metadata-item">
+                                            <span class="uow-metadata-label">Error ID</span>
+                                            <span class="uow-metadata-value uow-mono">{err.errorId}</span>
+                                        </div>
+                                        <!-- Work Item (hidden when on work item page) -->
+                                        <template lwc:if={err.showWorkItem}>
+                                            <div class="uow-metadata-item">
+                                                <span class="uow-metadata-label">Work Item</span>
+                                                <span class="uow-metadata-value">
+                                                    <template lwc:if={err.hasWorkItemLink}>
+                                                        <a href="#"
+                                                        class="uow-work-item-link"
+                                                        data-record-id={err.workItemRecordId}
+                                                        title={err.workItemId}
+                                                        onclick={handleNavigateToWorkItem}>
+                                                            {err.workItemIdShort}
+                                                        </a>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <span class="uow-mono" title={err.workItemId}>{err.workItemIdShort}</span>
+                                                    </template>
+                                                </span>
+                                            </div>
+                                        </template>
+                                        <div class="uow-metadata-item">
+                                            <span class="uow-metadata-label">Occurred At</span>
+                                            <span class="uow-metadata-value">{err.formattedDateTime}</span>
+                                        </div>
+                                        <template lwc:if={err.hasAttempts}>
+                                            <div class="uow-metadata-item">
+                                                <span class="uow-metadata-label">Attempt</span>
+                                                <span class="uow-metadata-value">{err.attemptNumber}</span>
+                                            </div>
+                                        </template>
+                                        <div class="uow-metadata-item">
+                                            <span class="uow-metadata-label">Retryable</span>
+                                            <span class="uow-metadata-value">
+                                                <template lwc:if={err.isRetryable}>
+                                                    <lightning-icon icon-name="utility:check" size="xx-small" class="uow-retryable-yes" alternative-text="Yes"></lightning-icon>
+                                                    Yes
+                                                </template>
+                                                <template lwc:else>
+                                                    <lightning-icon icon-name="utility:close" size="xx-small" class="uow-retryable-no" alternative-text="No"></lightning-icon>
+                                                    No
+                                                </template>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Suggestion (if present) -->
+                                    <template lwc:if={err.hasSuggestion}>
+                                        <div class="uow-detail-section uow-suggestion-section">
+                                            <div class="uow-detail-label">
+                                                <lightning-icon icon-name="utility:light_bulb" size="xx-small" class="slds-m-right_xx-small" alternative-text="Suggestion"></lightning-icon>
+                                                Suggestion
+                                            </div>
+                                            <div class="uow-suggestion-text">{err.suggestion}</div>
+                                        </div>
+                                    </template>
+
+                                    <!-- Documentation Link (if present) -->
+                                    <template lwc:if={err.hasDocumentationUrl}>
+                                        <div class="uow-detail-section">
+                                            <a href={err.documentationUrl} target="_blank" class="uow-doc-link">
+                                                <lightning-icon icon-name="utility:new_window" size="xx-small" class="slds-m-right_xx-small" alternative-text="Open"></lightning-icon>
+                                                View Documentation
+                                            </a>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

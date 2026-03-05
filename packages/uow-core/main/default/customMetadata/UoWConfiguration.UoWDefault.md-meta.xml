@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>UoW: Default</label>
+    <protected>false</protected>
+    <values>
+        <field>ApprovalChannelClassName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ApprovalMetadataJson__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ApprovalNamedCredential__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ApprovalTimeoutMinutes__c</field>
+        <value xsi:type="xsd:double">30.0</value>
+    </values>
+    <values>
+        <field>CalloutStrategyClassName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ConfidenceThreshold__c</field>
+        <value xsi:type="xsd:double">0.7</value>
+    </values>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">Default configuration for UnitOfWork framework</value>
+    </values>
+    <values>
+        <field>DmlBatchSize__c</field>
+        <value xsi:type="xsd:double">200.0</value>
+    </values>
+    <values>
+        <field>DmlSecurityMode__c</field>
+        <value xsi:type="xsd:string">ENFORCED</value>
+    </values>
+    <values>
+        <field>DmlStrategyClassName__c</field>
+        <value xsi:type="xsd:string">UoWSecurityDmlStrategy</value>
+    </values>
+    <values>
+        <field>EmailChannelClassName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>EnableMasking__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>EnableOriginSourceMetadata__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>EnableScenarioRecordTracking__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>EnableTracing__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>EventBatchSize__c</field>
+        <value xsi:type="xsd:double">100.0</value>
+    </values>
+    <values>
+        <field>EventChannelClassName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>EventPublishFailureHandlerClassName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowChannelClassName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>MaxAsyncDepth__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>MaxDmlBatchSize__c</field>
+        <value xsi:type="xsd:double">10000.0</value>
+    </values>
+    <values>
+        <field>MinimumLoggingLevel__c</field>
+        <value xsi:type="xsd:string">INFO</value>
+    </values>
+    <values>
+        <field>NotificationChannelClassName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>RethrowTransactionExceptions__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>RiskApprovalThreshold__c</field>
+        <value xsi:type="xsd:double">75.0</value>
+    </values>
+    <values>
+        <field>RiskAssessorClassName__c</field>
+        <value xsi:type="xsd:string">UoWStandardRiskAssessor</value>
+    </values>
+    <values>
+        <field>RiskBlockThreshold__c</field>
+        <value xsi:type="xsd:double">90.0</value>
+    </values>
+    <values>
+        <field>RiskCriticalThreshold__c</field>
+        <value xsi:type="xsd:double">90.0</value>
+    </values>
+    <values>
+        <field>RiskHighThreshold__c</field>
+        <value xsi:type="xsd:double">75.0</value>
+    </values>
+    <values>
+        <field>RiskLowThreshold__c</field>
+        <value xsi:type="xsd:double">15.0</value>
+    </values>
+    <values>
+        <field>RiskMediumThreshold__c</field>
+        <value xsi:type="xsd:double">50.0</value>
+    </values>
+    <values>
+        <field>TransactionFinalizerClassName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

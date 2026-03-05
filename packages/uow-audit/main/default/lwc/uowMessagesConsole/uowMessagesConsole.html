@@ -1,0 +1,96 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <div class="uow-messages-console">
+        <!-- Error State -->
+        <template lwc:if={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <h2>Error loading messages</h2>
+                </div>
+            </div>
+        </template>
+
+        <!-- Main Content -->
+        <template lwc:else>
+            <!-- Filter Bar -->
+            <div class="filter-bar slds-p-around_small slds-border_bottom">
+                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                    <!-- Level Filter Combobox -->
+                    <div class="level-filter">
+                        <lightning-combobox
+                            name="logLevel"
+                            label="Filter by Level"
+                            value={selectedLogLevel}
+                            options={logLevelOptions}
+                            onchange={handleLogLevelChange}
+                            variant="label-hidden">
+                        </lightning-combobox>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="search-container">
+                        <lightning-input
+                            type="search"
+                            placeholder="Search messages..."
+                            value={searchTerm}
+                            onchange={handleSearchChange}
+                            variant="label-hidden">
+                        </lightning-input>
+                    </div>
+                </div>
+
+                <!-- Filter Summary -->
+                <div class="filter-summary slds-m-top_x-small slds-text-body_small slds-text-color_weak">
+                    Showing {filteredCount} of {totalCount} messages
+                </div>
+            </div>
+
+            <!-- Empty State - No Messages -->
+            <template lwc:if={hasNoMessages}>
+                <div class="slds-p-around_large slds-text-align_center">
+                    <lightning-icon icon-name="utility:info" size="large" class="slds-m-bottom_small"></lightning-icon>
+                    <p class="slds-text-heading_small">No Messages</p>
+                    <p class="slds-text-body_regular slds-text-color_weak">
+                        This transaction has no messages to display.
+                    </p>
+                </div>
+            </template>
+
+            <!-- Messages List -->
+            <template lwc:elseif={hasMessages}>
+                <div class="messages-list">
+                    <template for:each={displayMessages} for:item="msg">
+                        <div key={msg.key} class="message-row">
+                            <!-- Timestamp -->
+                            <span class="message-timestamp">{msg.relativeTime}</span>
+
+                            <!-- Level Badge -->
+                            <span class={msg.levelClass}>{msg.levelLabel}</span>
+
+                            <!-- Source -->
+                            <span class="message-source" title={msg.source}>{msg.source}</span>
+
+                            <!-- Message Text -->
+                            <span class="message-text">{msg.message}</span>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- No Filtered Results -->
+            <template lwc:elseif={internalMessages.length}>
+                <div class="slds-p-around_large slds-text-align_center">
+                    <lightning-icon icon-name="utility:filterList" size="large" class="slds-m-bottom_small"></lightning-icon>
+                    <p class="slds-text-heading_small">No Matching Messages</p>
+                    <p class="slds-text-body_regular slds-text-color_weak">
+                        Adjust your filters or search term to see messages.
+                    </p>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

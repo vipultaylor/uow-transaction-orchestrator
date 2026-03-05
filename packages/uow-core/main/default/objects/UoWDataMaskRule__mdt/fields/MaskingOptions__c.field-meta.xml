@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MaskingOptions__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>JSON configuration for masking strategy. Examples: {&quot;visibleCharacters&quot;: 4, &quot;position&quot;: &quot;end&quot;} for PARTIAL, {&quot;algorithm&quot;: &quot;SHA-256&quot;, &quot;truncateLength&quot;: 32} for HASH, {&quot;replacement&quot;: &quot;***REDACTED***&quot;} for REGEX_PATTERN.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>JSON options by strategy: PARTIAL: {&quot;visibleChars&quot;: 4, &quot;position&quot;: &quot;end&quot;|&quot;start&quot;}. EMAIL: {&quot;showLocalChars&quot;: 1, &quot;showDomain&quot;: true}. FULL/REDACT: leave empty.</inlineHelpText>
+    <label>Masking Options (JSON)</label>
+    <length>32768</length>
+    <securityClassification>Internal</securityClassification>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

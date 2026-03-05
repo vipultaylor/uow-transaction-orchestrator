@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>UoWLogo</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
+    </brand>
+    <description>Audit and observability console for monitoring Unit of Work transaction execution, viewing audit logs, timeline visualization, and compliance tracking</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>UoW: Audit Manager</label>
+    <navType>Console</navType>
+    <tabs>UoWAuditTransaction__c</tabs>
+    <tabs>UoWAuditArchives</tabs>
+    <tabs>UoWScenario__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>UoW_Audit_Manager_UtilityBar</utilityBar>
+    <workspaceConfig>
+        <mappings>
+            <tab>UoWAuditArchives</tab>
+        </mappings>
+        <mappings>
+            <tab>UoWAuditTransaction__c</tab>
+        </mappings>
+        <mappings>
+            <tab>UoWScenario__c</tab>
+        </mappings>
+    </workspaceConfig>
+</CustomApplication>

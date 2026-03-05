@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MaskedFields__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Comma-separated list of field API names that were masked in this work item (e.g., &quot;Email__c, SSN__c&quot;).</description>
+    <inlineHelpText>Comma-separated list of field API names that were masked in this work item (e.g., &quot;Email__c, SSN__c&quot;).</inlineHelpText>
+    <label>Masked Fields</label>
+    <length>1000</length>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>2</visibleLines>
+</CustomField>

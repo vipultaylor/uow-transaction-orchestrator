@@ -1,0 +1,24 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <ul lwc:if={hasSpans} class="slds-timeline">
+        <template for:each={spans} for:item="span">
+            <!-- Span Event (point-in-time occurrence) -->
+            <c-uow-span-event
+                lwc:if={span.isEvent}
+                key={span.spanId}
+                span={span}>
+            </c-uow-span-event>
+
+            <!-- Standard Span (operation with duration) -->
+            <c-uow-span-item
+                lwc:else
+                key={span.spanId}
+                span={span}
+                total-duration-ms={totalDurationMs}>
+            </c-uow-span-item>
+        </template>
+    </ul>
+</template>

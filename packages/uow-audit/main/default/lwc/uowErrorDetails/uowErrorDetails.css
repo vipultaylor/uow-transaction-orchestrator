@@ -1,0 +1,349 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/* uowErrorDetails.css - Error details panel styling
+   Using SLDS tokens for typography/spacing, UoW variables for semantic colors */
+@import 'c/uowSharedStylesModule';
+
+/* ============================================================================
+   SECTION HEADER - Harmonized with other components
+   ============================================================================ */
+
+.uow-section-header {
+    padding: var(--uow-section-header-padding-y) var(--uow-section-header-padding-x);
+    background-color: var(--uow-section-header-bg);
+    border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+
+.uow-section-title {
+    font-size: var(--uow-section-header-font-size);
+    font-weight: var(--uow-section-header-font-weight);
+    color: var(--uow-section-header-color);
+    text-transform: uppercase;
+}
+
+.uow-error-icon {
+    --slds-c-icon-color-foreground-default: var(--uow-status-error);
+}
+
+/* ============================================================================
+   ERRORS LIST
+   ============================================================================ */
+
+.uow-errors-list {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.uow-error-row {
+    border-bottom: 1px solid var(--uow-row-border-color);
+    background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+}
+
+.uow-error-row:last-child {
+    border-bottom: none;
+}
+
+/* ============================================================================
+   ERROR HEADER (Clickable Row)
+   ============================================================================ */
+
+.uow-error-header {
+    display: flex;
+    align-items: center;
+    gap: var(--slds-g-spacing-3, 0.5rem);
+    padding: var(--uow-row-padding-y) var(--uow-row-padding-x);
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+}
+
+.uow-error-header:hover {
+    background-color: var(--uow-row-hover-bg);
+}
+
+.uow-expand-icon {
+    flex-shrink: 0;
+    --slds-c-icon-color-foreground-default: var(--uow-text-secondary-color);
+}
+
+/* Error Type Badge - Using shared badge tokens */
+.uow-error-type-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--uow-badge-padding-y) var(--uow-badge-padding-x);
+    background-color: var(--uow-severity-error-bg);
+    color: var(--uow-severity-error-text);
+    border-radius: var(--uow-badge-border-radius);
+    font-size: var(--uow-badge-font-size);
+    font-weight: var(--uow-badge-font-weight);
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Error Message Preview */
+.uow-error-message-preview {
+    flex: 1;
+    font-size: var(--uow-text-meta-size);
+    color: var(--slds-g-color-neutral-base-10, #181818);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+/* Metadata Indicators */
+.uow-error-indicators {
+    display: flex;
+    align-items: center;
+    gap: var(--slds-g-spacing-2, 0.25rem);
+    flex-shrink: 0;
+}
+
+.uow-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--uow-badge-padding-y) var(--uow-badge-padding-x);
+    border-radius: var(--uow-badge-border-radius);
+    font-size: var(--uow-badge-font-size);
+    font-weight: var(--uow-badge-font-weight);
+}
+
+.uow-indicator--retryable {
+    background-color: var(--uow-severity-info-bg);
+    color: var(--uow-severity-info-text);
+}
+
+.uow-indicator--attempt {
+    background-color: var(--uow-severity-warn-bg);
+    color: var(--uow-severity-warn-text);
+}
+
+/* Timestamp */
+.uow-error-timestamp {
+    font-family: var(--uow-font-mono);
+    font-size: var(--uow-text-meta-size);
+    color: var(--uow-text-secondary-color);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Error ID */
+.uow-error-id {
+    font-family: var(--uow-font-mono);
+    font-size: var(--uow-text-meta-size);
+    color: var(--uow-text-meta-color);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Work Item Link */
+.uow-work-item-link {
+    font-family: var(--uow-font-mono);
+    font-size: var(--uow-text-meta-size);
+    color: var(--slds-g-color-brand-base-50, #0176d3);
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.uow-work-item-link:hover {
+    text-decoration: underline;
+    color: var(--slds-g-color-brand-base-60, #014486);
+}
+
+/* Work Item ID (non-link fallback) */
+.uow-work-item-id {
+    font-family: var(--uow-font-mono);
+    font-size: var(--uow-text-meta-size);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ============================================================================
+   ERROR DETAIL PANEL (Expandable)
+   ============================================================================ */
+
+.uow-error-detail-panel {
+    padding: var(--uow-content-padding);
+    padding-top: 0;
+    background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+    border-top: 1px solid var(--uow-row-border-color);
+    margin-left: 1.5rem;
+}
+
+.uow-detail-section {
+    margin-bottom: var(--uow-content-gap);
+}
+
+.uow-detail-section:last-child {
+    margin-bottom: 0;
+}
+
+.uow-detail-label {
+    display: flex;
+    align-items: center;
+    font-size: var(--uow-section-header-font-size);
+    font-weight: var(--uow-section-header-font-weight);
+    color: var(--uow-section-header-color);
+    text-transform: uppercase;
+    margin-bottom: var(--slds-g-spacing-2, 0.25rem);
+}
+
+.uow-detail-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: var(--slds-g-spacing-2, 0.25rem) 0;
+}
+
+.uow-detail-header:hover {
+    color: var(--slds-g-color-brand-base-50, #0176d3);
+}
+
+.uow-detail-header .uow-detail-label {
+    margin-bottom: 0;
+}
+
+.uow-detail-value {
+    font-size: var(--uow-text-meta-size);
+    color: var(--slds-g-color-neutral-base-10, #181818);
+}
+
+/* Full Error Message */
+.uow-error-message-full {
+    padding: var(--slds-g-spacing-3, 0.5rem);
+    background-color: var(--uow-severity-error-bg);
+    border-radius: var(--slds-g-radius-border-2, 0.25rem);
+    border-left: 3px solid var(--uow-status-error);
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* Stack Trace */
+.uow-stack-trace {
+    margin: var(--slds-g-spacing-2, 0.25rem) 0 0 0;
+    padding: var(--slds-g-spacing-3, 0.5rem);
+    font-family: var(--uow-font-mono);
+    font-size: var(--uow-text-meta-size);
+    line-height: 1.5;
+    background-color: var(--uow-section-header-bg);
+    border-radius: var(--slds-g-radius-border-2, 0.25rem);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Error Context */
+.uow-error-context {
+    margin: var(--slds-g-spacing-2, 0.25rem) 0 0 0;
+    padding: var(--slds-g-spacing-3, 0.5rem);
+    font-family: var(--uow-font-mono);
+    font-size: var(--uow-text-meta-size);
+    line-height: 1.5;
+    background-color: var(--uow-section-header-bg);
+    border-radius: var(--slds-g-radius-border-2, 0.25rem);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* ============================================================================
+   METADATA GRID
+   ============================================================================ */
+
+.uow-metadata-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--slds-g-spacing-3, 0.5rem);
+    padding: var(--slds-g-spacing-3, 0.5rem);
+    background-color: var(--uow-section-header-bg);
+    border-radius: var(--slds-g-radius-border-2, 0.25rem);
+    margin-top: var(--uow-content-gap);
+}
+
+.uow-metadata-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--slds-g-spacing-1, 0.125rem);
+    min-width: 0; /* Allow text truncation in flex children */
+}
+
+.uow-metadata-label {
+    font-size: var(--uow-badge-font-size);
+    font-weight: var(--uow-badge-font-weight);
+    color: var(--uow-text-secondary-color);
+    text-transform: uppercase;
+}
+
+.uow-metadata-value {
+    font-size: var(--uow-text-meta-size);
+    color: var(--slds-g-color-neutral-base-10, #181818);
+    display: flex;
+    align-items: center;
+    gap: var(--slds-g-spacing-1, 0.125rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uow-mono {
+    font-family: var(--uow-font-mono);
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uow-retryable-yes {
+    --slds-c-icon-color-foreground-default: var(--uow-status-success);
+}
+
+.uow-retryable-no {
+    --slds-c-icon-color-foreground-default: var(--uow-status-error);
+}
+
+/* ============================================================================
+   SUGGESTION SECTION
+   ============================================================================ */
+
+.uow-suggestion-section {
+    padding: var(--slds-g-spacing-3, 0.5rem);
+    background-color: var(--uow-severity-info-bg);
+    border-radius: var(--slds-g-radius-border-2, 0.25rem);
+    border-left: 3px solid var(--uow-severity-info-text);
+}
+
+.uow-suggestion-text {
+    font-size: var(--uow-text-meta-size);
+    color: var(--slds-g-color-neutral-base-10, #181818);
+    margin-top: var(--slds-g-spacing-2, 0.25rem);
+}
+
+/* ============================================================================
+   DOCUMENTATION LINK
+   ============================================================================ */
+
+.uow-doc-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--uow-text-meta-size);
+    color: var(--slds-g-color-brand-base-50, #0176d3);
+    text-decoration: none;
+}
+
+.uow-doc-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   EMPTY STATE
+   ============================================================================ */
+
+.slds-text-align_center {
+    color: var(--slds-g-color-neutral-base-50, #9e9e9e);
+}

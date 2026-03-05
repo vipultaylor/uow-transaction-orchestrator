@@ -1,0 +1,244 @@
+<apex:component controller="UoWAuditTransactionDeleteController" allowDML="true">
+    <apex:attribute name="inputRecordIds" type="String[]" assignTo="{!recordIds}" required="true"
+                    description="List of record IDs to delete"/>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9000;
+        }
+        .modal-container {
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            background-color: #ba0517;
+            color: white;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .modal-footer {
+            padding: 12px 20px;
+            border-top: 1px solid #dddbda;
+            text-align: right;
+            background-color: #f3f3f3;
+        }
+        .info-text {
+            margin-bottom: 16px;
+            color: #3e3e3c;
+        }
+        .record-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+        .record-table th {
+            background-color: #f3f3f3;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid #dddbda;
+            color: #3e3e3c;
+        }
+        .record-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #dddbda;
+            color: #3e3e3c;
+        }
+        .record-table tbody tr:hover {
+            background-color: #f3f3f3;
+        }
+        .section-header {
+            font-size: 13px;
+            font-weight: 600;
+            margin: 16px 0 8px 0;
+            color: #3e3e3c;
+        }
+        .cascade-warning {
+            background-color: #fff8e1;
+            border-left: 4px solid #ff9800;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+        .error-content {
+            color: #c23934;
+            padding: 20px;
+            text-align: center;
+        }
+        .success-content {
+            color: #04844b;
+            padding: 20px;
+            text-align: center;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            margin-left: 8px;
+        }
+        .btn-cancel {
+            background-color: white;
+            color: #0176d3;
+            border: 1px solid #dddbda;
+        }
+        .btn-cancel:hover {
+            background-color: #f3f3f3;
+        }
+        .btn-delete {
+            background-color: #ba0517;
+            color: white;
+            border: none;
+        }
+        .btn-delete:hover {
+            background-color: #8e0000;
+        }
+    </style>
+
+    <apex:form >
+        <apex:actionFunction name="doInit" action="{!initialize}" reRender="modalContent"/>
+
+        <div class="modal-backdrop">
+            <div class="modal-container">
+                <apex:outputPanel id="modalContent">
+                    <!-- Error State -->
+                    <apex:outputPanel rendered="{!hasError}">
+                        <div class="modal-header">Error</div>
+                        <div class="modal-body">
+                            <div class="error-content">
+                                <p><strong>{!errorMessage}</strong></p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <apex:commandButton value="Go Back" action="{!cancel}" styleClass="btn btn-cancel"/>
+                        </div>
+                    </apex:outputPanel>
+
+                    <!-- Success State - Immediate redirect -->
+                    <apex:outputPanel rendered="{!deleteSuccess}">
+                        <script>
+                            // Immediate redirect after successful deletion
+                            if (window.opener) {
+                                window.opener.location.reload();
+                                window.close();
+                            } else {
+                                window.location.href = '/lightning/o/UoWAuditTransaction__c/list';
+                            }
+                        </script>
+                    </apex:outputPanel>
+
+                    <!-- Confirmation State -->
+                    <apex:outputPanel rendered="{!AND(hasSelectedRecords, NOT(deleteSuccess), NOT(hasError))}">
+                        <div class="modal-header">Delete {!totalCount} Transaction(s)</div>
+                        <div class="modal-body">
+                            <div class="info-text">
+                                Are you sure that you want to delete these transactions?
+                            </div>
+
+                            <!-- Cascade Delete Warning -->
+                            <apex:outputPanel rendered="{!AND(cascadeDeleteEnabled, hasRelatedRecords)}">
+                                <div class="cascade-warning">
+                                    <strong>Cascade Delete Enabled:</strong> {!relatedCount} additional related transaction(s) with the same Correlation ID will also be deleted.
+                                </div>
+                            </apex:outputPanel>
+
+                            <!-- Selected Records Table -->
+                            <table class="record-table">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction #</th>
+                                        <th>Status</th>
+                                        <th>Start Time</th>
+                                        <th>Work Items</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!selectedRecords}" var="rec">
+                                        <tr>
+                                            <td>{!rec.Name}</td>
+                                            <td>{!rec.TransactionStatus__c}</td>
+                                            <td>
+                                                <apex:outputText value="{0, date, dd/MM/yyyy, HH:mm}">
+                                                    <apex:param value="{!rec.StartTime__c}"/>
+                                                </apex:outputText>
+                                            </td>
+                                            <td>{!rec.TotalWorkItems__c}</td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+
+                            <!-- Related Records Table (if cascade enabled) -->
+                            <apex:outputPanel rendered="{!AND(cascadeDeleteEnabled, hasRelatedRecords)}">
+                                <div class="section-header">Related Records - Will Also Be Deleted ({!relatedCount})</div>
+                                <table class="record-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Transaction #</th>
+                                            <th>Status</th>
+                                            <th>Start Time</th>
+                                            <th>Work Items</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat value="{!relatedRecords}" var="rec">
+                                            <tr>
+                                                <td>{!rec.Name}</td>
+                                                <td>{!rec.TransactionStatus__c}</td>
+                                                <td>
+                                                    <apex:outputText value="{0, date, dd/MM/yyyy, HH:mm}">
+                                                        <apex:param value="{!rec.StartTime__c}"/>
+                                                    </apex:outputText>
+                                                </td>
+                                                <td>{!rec.TotalWorkItems__c}</td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </apex:outputPanel>
+                        </div>
+                        <div class="modal-footer">
+                            <apex:commandButton value="Cancel" action="{!cancel}" styleClass="btn btn-cancel"/>
+                            <apex:commandButton value="Delete Transactions" action="{!deleteRecords}" styleClass="btn btn-delete" reRender="modalContent"/>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </div>
+        </div>
+    </apex:form>
+
+    <script>
+        window.onload = function() {
+            doInit();
+        };
+    </script>
+</apex:component>

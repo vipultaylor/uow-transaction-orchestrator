@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsDmlRows__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>DML Rows usage as percentage of transaction total. Shows warning (30%) and danger (50%) thresholds to identify resource-heavy work items.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISBLANK(LimitsDmlRowsConsumed__c) ||
+  ISBLANK(AuditTransaction__r.LimitsDmlRowsConsumed__c) ||
+  AuditTransaction__r.LimitsDmlRowsConsumed__c = 0,
+  &quot;N/A&quot;,
+  IF(LimitsDmlRowsConsumed__c / AuditTransaction__r.LimitsDmlRowsConsumed__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.DmlRows.WorkItemRedPercent__c / 100, &quot;⛔&quot;,
+    IF(LimitsDmlRowsConsumed__c / AuditTransaction__r.LimitsDmlRowsConsumed__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.DmlRows.WorkItemAmberPercent__c / 100, &quot;⚠️&quot;, &quot;✅&quot;)
+  )
+  &amp; &quot; &quot; &amp; TEXT(ROUND(LimitsDmlRowsConsumed__c / AuditTransaction__r.LimitsDmlRowsConsumed__c * 100, 1)) &amp; &quot;% of txn (&quot;
+  &amp; TEXT(LimitsDmlRowsConsumed__c) &amp; &quot; / &quot; &amp; TEXT(AuditTransaction__r.LimitsDmlRowsConsumed__c) &amp; &quot;)&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>DML Rows usage as percentage of transaction total. Shows warning (30%) and danger (50%) thresholds to identify resource-heavy work items.</inlineHelpText>
+    <label>DML Rows</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,37 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <lightning-card>
+        <div class="slds-box uow-trace-timeline">
+            <!-- Loading State -->
+            <template lwc:if={isLoading}>
+                <div class="slds-is-relative slds-p-around_medium" style="min-height: 8rem">
+                    <lightning-spinner variant="brand" alternative-text="Loading timeline"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Error Message -->
+            <template lwc:elseif={error}>
+                <div class="slds-p-around_medium">
+                    <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                        <span class="slds-assistive-text">Error</span>
+                        <h2>Error loading trace data</h2>
+                        <p>{error.body.message}</p>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Timeline Panel -->
+            <template lwc:elseif={isLoaded}>
+                <div class="slds-p-around_medium">
+                    <c-uow-span-tree
+                        spans={spans}
+                        total-duration-ms={totalDurationMs}>
+                    </c-uow-span-tree>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

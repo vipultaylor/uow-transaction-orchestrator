@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Standard UoW user with core transaction execution capabilities. Ideal for developers and end-users who need to execute transactions. Note: Combine with UoW_Audit_Viewer permission set from the audit package to enable audit log viewing.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>UoW: User</label>
+    <permissionSets>UoWCoreUser</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

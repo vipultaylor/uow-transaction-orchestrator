@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DmlSummary__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Summary of DML work item execution status with success/failure counts.</description>
+    <externalId>false</externalId>
+    <formula>IF(TotalRecordsPlanned__c = 0,
+    &quot;&quot;,
+    IF(TotalRecordsPlanned__c = TotalRecordsProcessed__c &amp;&amp; TotalRecordsSuccess__c = TotalRecordsProcessed__c,
+        &quot;✅ &quot; &amp; TEXT(TotalRecordsSuccess__c) &amp; &quot; success(es)&quot;,
+        IF(TotalRecordsProcessed__c &gt; 0 &amp;&amp; TotalRecordsSuccess__c = 0,
+            &quot;❌ &quot; &amp; TEXT(TotalRecordsProcessed__c) &amp; &quot; failed&quot;,
+            IF(TotalRecordsProcessed__c = 0,
+                &quot;⏸️ &quot; &amp; TEXT(TotalRecordsPlanned__c) &amp; &quot; planned, not executed&quot;,
+                &quot;⚠️ &quot; &amp; TEXT(TotalRecordsSuccess__c) &amp; &quot;/&quot; &amp; TEXT(TotalRecordsPlanned__c) &amp; &quot; success(es)&quot; &amp;
+                IF(TotalRecordsProcessed__c - TotalRecordsSuccess__c &gt; 0,
+                    &quot; (&quot; &amp; TEXT(TotalRecordsProcessed__c - TotalRecordsSuccess__c) &amp; &quot; failed&quot; &amp;
+                    IF(TotalRecordsPlanned__c - TotalRecordsProcessed__c &gt; 0,
+                        &quot;, &quot; &amp; TEXT(TotalRecordsPlanned__c - TotalRecordsProcessed__c) &amp; &quot; not executed)&quot;,
+                        &quot;)&quot;
+                    ),
+                    IF(TotalRecordsPlanned__c - TotalRecordsProcessed__c &gt; 0,
+                        &quot; (&quot; &amp; TEXT(TotalRecordsPlanned__c - TotalRecordsProcessed__c) &amp; &quot; not executed)&quot;,
+                        &quot;&quot;
+                    )
+                )
+            )
+        )
+    )
+)</formula>
+    <inlineHelpText>Summary of DML work item execution status.</inlineHelpText>
+    <label>DML Summary</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

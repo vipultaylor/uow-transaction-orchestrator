@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TransactionType__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Type of audit transaction record. AUDIT for standard transactions created from event processing, TOMBSTONE for placeholder records created when audit events failed async delivery.</description>
+    <inlineHelpText>Type of audit transaction record. AUDIT for standard audit records, TOMBSTONE for failure placeholder records.</inlineHelpText>
+    <label>Transaction Type</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AUDIT</fullName>
+                <color>#0176D3</color>
+                <default>true</default>
+                <label>📋 Audit</label>
+            </value>
+            <value>
+                <fullName>TOMBSTONE</fullName>
+                <color>#BA0517</color>
+                <default>false</default>
+                <label>🪦 Tombstone</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

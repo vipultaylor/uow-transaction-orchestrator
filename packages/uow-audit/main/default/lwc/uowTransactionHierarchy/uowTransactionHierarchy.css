@@ -1,0 +1,50 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/* Table Container */
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Hierarchy Table */
+.hierarchy-table {
+    width: 100%;
+}
+
+/* Column Widths */
+.hierarchy-table th:first-child,
+.hierarchy-table td:first-child {
+    width: 35%;
+}
+
+.hierarchy-table th:nth-child(2),
+.hierarchy-table td:nth-child(2) {
+    width: 40%;
+}
+
+.hierarchy-table th:nth-child(3),
+.hierarchy-table td:nth-child(3) {
+    width: 12%;
+}
+
+.hierarchy-table th:nth-child(4),
+.hierarchy-table td:nth-child(4) {
+    width: 13%;
+}
+
+/* Current Record Highlight */
+.current-record-row {
+    background-color: var(--slds-g-color-brand-base-95, #e5f2ff);
+}
+
+/* Link Styling */
+.hierarchy-table a {
+    color: var(--slds-g-color-brand-base-50, #0176d3);
+    text-decoration: none;
+}
+
+.hierarchy-table a:hover {
+    text-decoration: underline;
+}

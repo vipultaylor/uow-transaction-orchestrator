@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WorkId__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Work item identifier from the original UoW execution.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Work item identifier from the original UoW execution.</inlineHelpText>
+    <label>Work Id</label>
+    <length>36</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

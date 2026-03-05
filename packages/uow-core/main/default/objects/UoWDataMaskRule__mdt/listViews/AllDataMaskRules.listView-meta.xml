@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllDataMaskRules</fullName>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>IsActive__c</columns>
+    <columns>MaskingStrategy__c</columns>
+    <columns>ComplianceCategory__c</columns>
+    <columns>SObjectType__c</columns>
+    <columns>FieldApiName__c</columns>
+    <columns>MatchType__c</columns>
+    <columns>MatchPattern__c</columns>
+    <columns>SortOrder__c</columns>
+    <columns>MaskingOptions__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

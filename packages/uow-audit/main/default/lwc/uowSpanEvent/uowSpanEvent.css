@@ -1,0 +1,40 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/* ============================================================================
+   SPAN EVENT STYLING (formerly milestone)
+   Using SLDS spacing tokens and UoW severity colors
+   ============================================================================ */
+@import 'c/uowSharedStylesModule';
+
+.uow-span-event-item {
+    padding-left: var(--slds-g-spacing-3, 0.5rem);
+    padding-bottom: var(--slds-g-spacing-2, 0.25rem);
+    padding-top: var(--slds-g-spacing-2, 0.25rem);
+}
+
+/* Event type color coding - using UoW severity/status colors */
+.uow-event-type-state {
+    --slds-c-icon-color-foreground-default: var(--uow-severity-info-text);
+}
+
+.uow-event-type-decision {
+    --slds-c-icon-color-foreground-default: var(--uow-status-success);
+}
+
+.uow-event-type-risk {
+    --slds-c-icon-color-foreground-default: var(--uow-severity-warn-text);
+}
+
+.uow-event-type-error {
+    --slds-c-icon-color-foreground-default: var(--uow-severity-error-text);
+}
+
+.uow-event-type-warning {
+    --slds-c-icon-color-foreground-default: var(--uow-severity-warn-text);
+}
+
+.uow-event-type-info {
+    --slds-c-icon-color-foreground-default: var(--uow-severity-debug-text);
+}

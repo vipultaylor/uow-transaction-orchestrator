@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Operation__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Combined summary of the work item operation. Shows relevant details based on work type: DML shows operation and SObject, Events show phase and event type, Flows show phase and API name, Callouts show HTTP method and endpoint, etc. Designed for use in related lists.</description>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(WorkType__c),
+  &quot;DML&quot;,
+    &quot;[&quot; &amp; TEXT(DmlOperation__c) &amp; &quot;] &quot; &amp; SObjectType__c,
+  &quot;EVENT&quot;,
+    &quot;[&quot; &amp; ExecutionPhase__c &amp; &quot;] &quot; &amp; SObjectType__c,
+  &quot;FLOW&quot;,
+    &quot;[&quot; &amp; ExecutionPhase__c &amp; &quot;] &quot; &amp; FlowApiName__c,
+  &quot;CALLOUT&quot;,
+    &quot;[&quot; &amp; ExecutionPhase__c &amp; &quot;] &quot; &amp; &quot;[&quot; &amp; HttpMethod__c &amp; &quot;] &quot; &amp; LEFT(Endpoint__c, 50) &amp; IF(LEN(Endpoint__c) &gt; 50, &quot;...&quot;, &quot;&quot;),
+  &quot;EMAIL&quot;,
+    &quot;[&quot; &amp; ExecutionPhase__c &amp; &quot;] (&quot; &amp; TEXT(ProcessedCount__c) &amp; &quot; recipients)&quot;,
+  &quot;NOTIFICATION&quot;,
+    &quot;[&quot; &amp; ExecutionPhase__c &amp; &quot;] &quot; &amp; NotificationType__c,
+  &quot;[&quot; &amp; TEXT(WorkType__c) &amp; &quot;]&quot;
+)</formula>
+    <inlineHelpText>Combined summary of the work item operation. Shows relevant details based on work type: DML shows operation and SObject, Events show phase and event type, Flows show phase and API name, Callouts show HTTP method and endpoint, etc. Designed for use in related lists.</inlineHelpText>
+    <label>Operation</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

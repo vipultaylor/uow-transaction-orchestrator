@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Data masking rules for sensitive fields. Used by UoWMaskingService to apply pattern-based or regex-based masking strategies.</description>
+    <label>UoW Data Mask Rule</label>
+    <pluralLabel>UoW Data Mask Rules</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

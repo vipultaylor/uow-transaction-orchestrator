@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>UK Sort Code</label>
+    <protected>false</protected>
+    <values>
+        <field>ComplianceCategory__c</field>
+        <value xsi:type="xsd:string">GDPR,PII</value>
+    </values>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">EXAMPLE RULE - Enable to use. Masks UK bank sort codes matching format XX-XX-XX. Full masking applied.</value>
+    </values>
+    <values>
+        <field>FieldApiName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>MaskingOptions__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>MaskingStrategy__c</field>
+        <value xsi:type="xsd:string">FULL</value>
+    </values>
+    <values>
+        <field>MatchPattern__c</field>
+        <value xsi:type="xsd:string">\d{2}-\d{2}-\d{2}</value>
+    </values>
+    <values>
+        <field>MatchType__c</field>
+        <value xsi:type="xsd:string">REGEX_PATTERN</value>
+    </values>
+    <values>
+        <field>SObjectType__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SortOrder__c</field>
+        <value xsi:type="xsd:double">50.0</value>
+    </values>
+</CustomMetadata>

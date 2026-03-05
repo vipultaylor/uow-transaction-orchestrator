@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Master configuration for Unit of Work transaction orchestrator. Defines feature flags, logging levels, channel implementations, and links to plugin/policy/object settings.</description>
+    <label>UoW Configuration</label>
+    <pluralLabel>UoW Configurations</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

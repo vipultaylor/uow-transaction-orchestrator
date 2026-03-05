@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SObjectType__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Target SObject API name (e.g., Contact, Account). Required for EXACT_FIELD match type. Optional for REGEX_PATTERN (leave blank to apply regex across all objects).</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Required for EXACT_FIELD. Enter SObject API name (e.g., Contact, Account, MyObject__c). Optional for REGEX_PATTERN - leave blank to apply across all objects.</inlineHelpText>
+    <label>SObject Type</label>
+    <length>80</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

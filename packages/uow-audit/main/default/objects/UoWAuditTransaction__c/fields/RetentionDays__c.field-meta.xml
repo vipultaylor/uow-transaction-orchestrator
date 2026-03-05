@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RetentionDays__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Number of days to retain this audit record. Copied from configuration at creation time. Used by archival job to determine when to archive/delete.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Days until this record is eligible for archival/deletion.</inlineHelpText>
+    <label>Retention Days</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

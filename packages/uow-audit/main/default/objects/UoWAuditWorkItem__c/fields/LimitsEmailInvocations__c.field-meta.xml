@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsEmailInvocations__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Email Invocations usage as percentage of transaction total. Shows warning (30%) and danger (50%) thresholds to identify resource-heavy work items.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISBLANK(LimitsEmailInvocationsConsumed__c) ||
+  ISBLANK(AuditTransaction__r.LimitsEmailInvocationsConsumed__c) ||
+  AuditTransaction__r.LimitsEmailInvocationsConsumed__c = 0,
+  &quot;N/A&quot;,
+  IF(LimitsEmailInvocationsConsumed__c / AuditTransaction__r.LimitsEmailInvocationsConsumed__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.EmailInvocations.WorkItemRedPercent__c / 100, &quot;⛔&quot;,
+    IF(LimitsEmailInvocationsConsumed__c / AuditTransaction__r.LimitsEmailInvocationsConsumed__c &gt;= $CustomMetadata.UoWLimitsThreshold__mdt.EmailInvocations.WorkItemAmberPercent__c / 100, &quot;⚠️&quot;, &quot;✅&quot;)
+  )
+  &amp; &quot; &quot; &amp; TEXT(ROUND(LimitsEmailInvocationsConsumed__c / AuditTransaction__r.LimitsEmailInvocationsConsumed__c * 100, 1)) &amp; &quot;% of txn (&quot;
+  &amp; TEXT(LimitsEmailInvocationsConsumed__c) &amp; &quot; / &quot; &amp; TEXT(AuditTransaction__r.LimitsEmailInvocationsConsumed__c) &amp; &quot;)&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Email Invocations usage as percentage of transaction total. Shows warning (30%) and danger (50%) thresholds to identify resource-heavy work items.</inlineHelpText>
+    <label>Email Invocations</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

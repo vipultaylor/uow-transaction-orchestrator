@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StrictestAction__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>The strictest policy action from all evaluations. Maps to UoWEnums.PolicyAction enum.</description>
+    <inlineHelpText>The strictest policy action from all evaluations. Maps to UoWEnums.PolicyAction enum.</inlineHelpText>
+    <label>Strictest Action</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ALLOW</fullName>
+                <default>false</default>
+                <label>Allow</label>
+            </value>
+            <value>
+                <fullName>ALLOW_WITH_JUSTIFICATION</fullName>
+                <default>false</default>
+                <label>Allow with Justification</label>
+            </value>
+            <value>
+                <fullName>REQUIRE_TRACING</fullName>
+                <default>false</default>
+                <label>Require Tracing</label>
+            </value>
+            <value>
+                <fullName>REQUIRE_MASKING</fullName>
+                <default>false</default>
+                <label>Require Masking</label>
+            </value>
+            <value>
+                <fullName>REQUIRE_APPROVAL</fullName>
+                <default>false</default>
+                <label>Require Approval</label>
+            </value>
+            <value>
+                <fullName>DENY</fullName>
+                <default>false</default>
+                <label>Deny</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

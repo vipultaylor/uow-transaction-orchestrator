@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LimitsCpuTimeConsumed__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>CPU time consumed during transaction (ms).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>CPU time consumed during transaction (ms).</inlineHelpText>
+    <label>CPU Time Consumed (ms)</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <securityClassification>Internal</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

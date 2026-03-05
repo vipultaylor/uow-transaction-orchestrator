@@ -1,0 +1,135 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <li class="slds-timeline__item">
+        <div class={itemClass}>
+            <div class="slds-media">
+                <!-- Icon Section -->
+                <div class="slds-media__figure">
+                    <div class="slds-grid slds-grid_vertical-align-center">
+                        <!-- Toggle Button (only show if expandable) -->
+                        <lightning-button-icon
+                            lwc:if={isExpandable}
+                            icon-name={expandIcon}
+                            variant="bare"
+                            alternative-text="Toggle"
+                            title="Toggle"
+                            class="slds-m-right_xx-small"
+                            onclick={handleToggle}>
+                        </lightning-button-icon>
+                        <!-- Spacer when not expandable (to maintain alignment) -->
+                        <div lwc:else class="slds-m-right_xx-small" style="width: 1.5rem;"></div>
+
+                        <!-- Span Icon -->
+                        <div class={iconContainerClass}>
+                            <lightning-icon
+                                icon-name={iconName}
+                                alternative-text={category}
+                                size="x-small">
+                            </lightning-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <div class="slds-media__body">
+                    <!-- Inline Header: Title + Duration Badge -->
+                    <div class="slds-grid">
+                        <!-- Left: Title -->
+                        <div class="slds-col slds-has-flexi-truncate">
+                            <h3 class="slds-truncate slds-text-heading_small">
+                                <!-- Phase spans: show formatted phase name -->
+                                <strong>{phaseDisplay}</strong>
+                                <!-- Duration Badge -->
+                                <span lwc:if={durationPercentage} class={durationBadgeClass}>
+                                    {duration} ({durationPercentage}%)
+                                </span>
+                                <span lwc:elseif={duration} class="slds-badge slds-m-left_x-small">
+                                    {duration}
+                                </span>
+                            </h3>
+                        </div>
+
+                        <!-- Right: Timestamp -->
+                        <div class="slds-col slds-no-flex">
+                            <p class="slds-text-body_small slds-text-color_weak">
+                                <lightning-formatted-date-time
+                                    value={startTime}
+                                    hour="2-digit"
+                                    minute="2-digit"
+                                    second="2-digit"
+                                    hour12="false">
+                                </lightning-formatted-date-time>
+                                <span lwc:if={timeOffset} class="slds-m-left_xx-small">(+{timeOffset}ms)</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Description: show span name for non-work-items, nothing for work items (already shown as title) -->
+                    <p lwc:if={showDescription} class="slds-m-top_xx-small slds-text-body_small slds-text-color_weak">
+                        {name}
+                    </p>
+
+                    <!-- Status Badge (for complete ERROR status) -->
+                    <div lwc:if={showStatusBadge} class="slds-m-top_xx-small">
+                        <span class={statusBadgeClass}>
+                            {statusCode}
+                        </span>
+                    </div>
+
+                    <!-- Partial Error Badge (for partial failures) -->
+                    <div lwc:if={showPartialErrorBadge} class="slds-m-top_xx-small">
+                        <span class="slds-badge uow-badge-warning"
+                              title="Partial failure - some operations succeeded">
+                            PARTIAL
+                        </span>
+                    </div>
+
+                    <!-- Contains Error Indicator (for parent spans with descendant errors) -->
+                    <div lwc:if={showContainsErrorIndicator} class="slds-m-top_xx-small">
+                        <span class="slds-badge uow-badge-contains-error"
+                              title="Contains errors in nested operations">
+                            Contains Error
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expanded Content -->
+            <div lwc:if={isExpanded} class="slds-m-top_small slds-m-left_xx-large slds-p-left_x-large">
+                <!-- Events within this span -->
+                <ul lwc:if={hasEvents} class="slds-timeline slds-m-bottom_small">
+                    <template for:each={events} for:item="event">
+                        <c-uow-span-event
+                            key={event.sequence}
+                            event={event}>
+                        </c-uow-span-event>
+                    </template>
+                </ul>
+
+                <!-- Work Items -->
+                <ul lwc:if={hasWorkItems} class="slds-timeline slds-m-bottom_small">
+                    <template for:each={workItems} for:item="workItem">
+                        <c-uow-work-item-event
+                            key={workItem.Id}
+                            work-item={workItem}>
+                        </c-uow-work-item-event>
+                    </template>
+                </ul>
+
+                <!-- Child Spans (Recursive) -->
+                <ul lwc:if={hasChildren} class="slds-timeline">
+                    <template for:each={children} for:item="childSpan">
+                        <c-uow-span-item
+                            key={childSpan.spanId}
+                            span={childSpan}
+                            total-duration-ms={totalDurationMs}>
+                        </c-uow-span-item>
+                    </template>
+                </ul>
+            </div>
+        </div>
+    </li>
+</template>

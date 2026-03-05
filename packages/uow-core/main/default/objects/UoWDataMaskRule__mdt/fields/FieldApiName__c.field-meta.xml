@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FieldApiName__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Specific field API name to mask (e.g., SSN__c, CreditCardNumber__c). Required when MatchType=EXACT_FIELD. Each rule masks one field - create separate rules for multiple fields to allow individual enable/disable control.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Required for EXACT_FIELD match type. Enter field API name (e.g., SSN__c, Birthdate). Must also set SObject Type. Not used for REGEX_PATTERN.</inlineHelpText>
+    <label>Field API Name</label>
+    <length>80</length>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
