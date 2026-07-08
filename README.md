@@ -19,6 +19,7 @@ The Unit of Work (UoW) Transaction Orchestrator is a comprehensive Apex framewor
 - **Policy-Based Governance** - Pluggable policy infrastructure for custom governance rules
 - **Risk Assessment** - Dynamic risk scoring with approval triggers
 - **Comprehensive Audit** - Full transaction timeline with phase execution metrics
+- **Record Audit Activity** - Jump straight from any business record to the transactions that touched it
 - **Extensive Extensibility** - Plugins, policies, DML strategies, channels, and more (10+ extension points)
 - **Data Masking** - Configuration-driven PII masking
 - **Asynchronous Execution** - Queueable-based async with serialization
@@ -70,30 +71,30 @@ The unlocked package is the recommended installation method. Install packages **
 
 #### Package 1: UoW Core (Required)
 
-<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ5000000HHajIAG">
+<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ5000000HHprIAG">
   <img alt="Install in Production" src="https://img.shields.io/badge/Install%20in-Production-0d6efd?style=for-the-badge">
 </a>
 
-<a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tJ5000000HHajIAG">
+<a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tJ5000000HHprIAG">
   <img alt="Install in Sandbox" src="https://img.shields.io/badge/Install%20in-Sandbox-198754?style=for-the-badge">
 </a>
 
 ```bash
-sf package install --package 04tJ5000000HHajIAG --target-org <your-org-alias> --wait 10
+sf package install --package 04tJ5000000HHprIAG --target-org <your-org-alias> --wait 10
 ```
 
 #### Package 2: UoW Audit (Optional)
 
-<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ5000000HHaoIAG">
+<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ5000000HHpwIAG">
   <img alt="Install in Production" src="https://img.shields.io/badge/Install%20in-Production-0d6efd?style=for-the-badge">
 </a>
 
-<a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tJ5000000HHaoIAG">
+<a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tJ5000000HHpwIAG">
   <img alt="Install in Sandbox" src="https://img.shields.io/badge/Install%20in-Sandbox-198754?style=for-the-badge">
 </a>
 
 ```bash
-sf package install --package 04tJ5000000HHaoIAG --target-org <your-org-alias> --wait 10
+sf package install --package 04tJ5000000HHpwIAG --target-org <your-org-alias> --wait 10
 ```
 
 #### Post-Installation: Assign Permission Sets
@@ -287,6 +288,7 @@ More examples in [Getting Started](https://github.com/vipultaylor/uow-transactio
 | **[Governor Limits Tracking](#audit-features)** | Per-operation limit consumption with before/after snapshots |
 | **[Configuration Snapshot](#audit-features)** | Historical capture of settings in effect at execution time |
 | **[Work Item Snapshots](#audit-features)** | Record-level data capture for DML, events, and emails |
+| **[Record Audit Activity](#audit-features)** | Record-page component linking a business record to the transactions/work items that touched it |
 | **[Origin Source Metadata](#audit-features)** | Track which code registered each operation with line numbers |
 | **[Error Tracking](#audit-features)** | Detailed errors with stack traces, suggestions, and retry info |
 | **[Messages Console](#audit-features)** | Developer console-style log viewer with severity filtering |
@@ -350,6 +352,10 @@ Developer console-style log viewer with severity filtering, detailed error captu
 
 > ![Messages Console](https://raw.githubusercontent.com/wiki/vipultaylor/uow-transaction-orchestrator/images/screenshots/logs-tab.png)
 
+### Record Audit Activity
+
+Drop the **UoW: Record Audit Activity** component onto any object's Lightning record page to see the UoW transactions and work items that touched that record — grouped by transaction, most-recent-first, with direct links to the audit records. Powered by an indexed reverse lookup (`UoWAuditRecordIndex__c`) written per sampled record; disable per object via `AuditSampleStrategy = NONE`.
+
 See [Audit System Documentation](https://github.com/vipultaylor/uow-transaction-orchestrator/wiki/Audit-System) for architecture, storage modes, configuration, and all feature details.
 
 ---
@@ -369,9 +375,9 @@ See [Audit System Documentation](https://github.com/vipultaylor/uow-transaction-
 
 ### uow-audit (~30 Apex classes + Objects + Visualization)
 - Audit plugin with platform event-based capture
-- Custom objects (transactions, work items, scenarios, publish failures)
+- Custom objects (transactions, work items, record index, scenarios, publish failures)
 - Big Object for long-term audit history storage
-- ~15 Lightning Web Components (timeline, messages console, error details, snapshots, and more)
+- ~16 Lightning Web Components (timeline, record audit activity, messages console, error details, snapshots, and more)
 
 ---
 
