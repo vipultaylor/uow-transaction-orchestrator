@@ -536,6 +536,42 @@ private class UoWCoreSerializationTests {
     // ============================================================================
 
     @isTest
+    static void test_samplingService_none_returnsEmptyEvenWithFailures() {
+        // NONE strategy must capture no records at all, even failed ones (error-priority is
+        // suppressed) and even when the total fits within a sample size.
+        UoWSerializationConfig config = UoWSerializationConfig.forAudit(UoWEnums.SamplingStrategy.NONE, 5);
+
+        List<Integer> noneLarge = UoWSamplingService.sampleIndices(
+            10, new Set<Integer>{ 1, 3 }, config
+        );
+        Assert.areEqual(0, noneLarge.size(), 'NONE should capture no indices for a large set');
+
+        List<Integer> noneSmall = UoWSamplingService.sampleIndices(
+            2, new Set<Integer>{ 0 }, config
+        );
+        Assert.areEqual(0, noneSmall.size(), 'NONE should capture no indices even when total <= sample size');
+    }
+
+    @isTest
+    static void test_fromObjectSetting_none_isAuthoritative() {
+        // NONE must win regardless of the sample size (including unset/zero size).
+        UoWFeatureSettings.ObjectSetting noneNoSize = new UoWFeatureSettings.ObjectSetting();
+        noneNoSize.auditSampleStrategy = 'NONE';
+        UoWSerializationConfig config1 = UoWSerializationConfig.fromObjectSetting(noneNoSize);
+        Assert.areEqual(UoWEnums.SamplingStrategy.NONE, config1.samplingStrategy, 'Strategy should be NONE');
+        Assert.areEqual(0, UoWSamplingService.sampleIndices(5, null, config1).size(),
+            'NONE with no size should still capture nothing');
+
+        UoWFeatureSettings.ObjectSetting noneWithSize = new UoWFeatureSettings.ObjectSetting();
+        noneWithSize.auditSampleStrategy = 'NONE';
+        noneWithSize.auditSampleSize = 10;
+        UoWSerializationConfig config2 = UoWSerializationConfig.fromObjectSetting(noneWithSize);
+        Assert.areEqual(UoWEnums.SamplingStrategy.NONE, config2.samplingStrategy, 'Strategy should be NONE');
+        Assert.areEqual(0, UoWSamplingService.sampleIndices(3, null, config2).size(),
+            'NONE with a size should still capture nothing');
+    }
+
+    @isTest
     static void test_samplingService_allStrategies() {
         UoWSerializationConfig configFirstN = UoWSerializationConfig.forAudit(UoWEnums.SamplingStrategy.FIRST_N, 3);
         UoWSerializationConfig configLastN = UoWSerializationConfig.forAudit(UoWEnums.SamplingStrategy.LAST_N, 3);

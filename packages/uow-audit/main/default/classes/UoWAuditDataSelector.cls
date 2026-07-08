@@ -649,4 +649,43 @@ public virtual without sharing class UoWAuditDataSelector {
 
         return results.isEmpty() ? null : results[0];
     }
+
+    // ============================================================================
+    // RECORD INDEX QUERIES (REVERSE LOOKUP)
+    // ============================================================================
+
+    /**
+     * Get the audit activity that touched a given business record, via the reverse-lookup
+     * index. Returns the index rows (with parent work item and transaction fields) that the
+     * record-page Audit Activity component needs, most-recent-first. USER_MODE for LWC display.
+     *
+     * @param recordId The business record Id (e.g. an Account/Contact Id)
+     * @param queryLimit Max rows to return; defaults to 50 when null or non-positive
+     * @return Index rows for the record, ordered by Timestamp__c descending (empty if none)
+     */
+    public virtual List<UoWAuditRecordIndex__c> getAuditActivityByRecordId(Id recordId, Integer queryLimit) {
+        if (recordId == null) {
+            return new List<UoWAuditRecordIndex__c>();
+        }
+
+        Integer effectiveLimit = (queryLimit != null && queryLimit > 0) ? queryLimit : 50;
+
+        return [
+            SELECT Id, RecordId__c, SObjectType__c, Operation__c, Timestamp__c,
+                   AuditWorkItem__c, AuditWorkItem__r.Name, AuditWorkItem__r.WorkType__c,
+                   AuditWorkItem__r.WorkItemStatus__c, AuditWorkItem__r.DmlOperation__c,
+                   AuditWorkItem__r.SObjectType__c, AuditWorkItem__r.ProcessedCount__c,
+                   AuditWorkItem__r.AuditTransaction__c,
+                   AuditWorkItem__r.AuditTransaction__r.Name,
+                   AuditWorkItem__r.AuditTransaction__r.TransactionStatus__c,
+                   AuditWorkItem__r.AuditTransaction__r.CommitMode__c,
+                   AuditWorkItem__r.AuditTransaction__r.StartTime__c,
+                   AuditWorkItem__r.AuditTransaction__r.ExecutionTimeMs__c
+            FROM UoWAuditRecordIndex__c
+            WHERE RecordId__c = :recordId
+            WITH USER_MODE
+            ORDER BY Timestamp__c DESC NULLS LAST
+            LIMIT :effectiveLimit
+        ];
+    }
 }

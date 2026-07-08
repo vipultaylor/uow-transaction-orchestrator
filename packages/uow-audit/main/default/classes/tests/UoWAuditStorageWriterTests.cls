@@ -542,4 +542,124 @@ private class UoWAuditStorageWriterTests {
         Assert.areEqual(2, wi.FailureCount__c, 'FailureCount should be mapped');
         Assert.areEqual(75, wi.ExecutionTimeMs__c, 'ExecutionTimeMs should be mapped');
     }
+
+    // ============================================================================
+    // CUSTOM OBJECT WRITER TESTS - RECORD INDEX (REVERSE LOOKUP)
+    // ============================================================================
+
+    @isTest
+    static void test_customObjectWriter_createsRecordIndexRows() {
+        // Arrange - one work item that touched two records
+        String txnId = 'TXN-IDX-' + System.now().getTime();
+        String recA = '001000000000001AAA';
+        String recB = '001000000000002AAA';
+
+        UoWAuditEvent__e txnEvent = UoWAuditTestDataFactory.createTransactionEvent(txnId, 'CUSTOM_OBJECT');
+        UoWAuditEvent__e wiEvent = UoWAuditTestDataFactory.createWorkItemEvent(txnId, 'WI-1', 'CUSTOM_OBJECT');
+        wiEvent.SObjectType__c = 'Account';
+        wiEvent.DmlOperation__c = 'INSERT_OP';
+        wiEvent.EndTime__c = System.now();
+        wiEvent.RecordIds__c = recA + ',' + recB;
+
+        // Act
+        Test.startTest();
+        UoWAuditCustomObjectWriter.writeAuditData(
+            new List<UoWAuditEvent__e>{ txnEvent },
+            new List<UoWAuditEvent__e>{ wiEvent }
+        );
+        Test.stopTest();
+
+        // Assert
+        List<UoWAuditRecordIndex__c> rows = [
+            SELECT RecordId__c, SObjectType__c, Operation__c, Timestamp__c, AuditWorkItem__c
+            FROM UoWAuditRecordIndex__c
+            ORDER BY RecordId__c ASC
+        ];
+        Assert.areEqual(2, rows.size(), 'Should create one index row per record Id');
+        Assert.areEqual(recA, rows[0].RecordId__c, 'First index row Id should match');
+        Assert.areEqual('Account', rows[0].SObjectType__c, 'SObjectType should be denormalized');
+        Assert.areEqual('INSERT', rows[0].Operation__c, 'Operation should have _OP suffix stripped');
+        Assert.areNotEqual(null, rows[0].AuditWorkItem__c, 'Index row should link to its work item');
+        Assert.areNotEqual(null, rows[0].Timestamp__c, 'Timestamp should be denormalized from EndTime');
+    }
+
+    @isTest
+    static void test_customObjectWriter_singleRecord_populatesRecordIdSingle() {
+        // Arrange - one work item, one record
+        String txnId = 'TXN-SINGLE-' + System.now().getTime();
+        String recId = '001000000000009AAA';
+
+        UoWAuditEvent__e txnEvent = UoWAuditTestDataFactory.createTransactionEvent(txnId, 'CUSTOM_OBJECT');
+        UoWAuditEvent__e wiEvent = UoWAuditTestDataFactory.createWorkItemEvent(txnId, 'WI-1', 'CUSTOM_OBJECT');
+        wiEvent.SObjectType__c = 'Account';
+        wiEvent.EndTime__c = System.now();
+        wiEvent.RecordIds__c = recId;
+
+        // Act
+        Test.startTest();
+        UoWAuditCustomObjectWriter.writeAuditData(
+            new List<UoWAuditEvent__e>{ txnEvent },
+            new List<UoWAuditEvent__e>{ wiEvent }
+        );
+        Test.stopTest();
+
+        // Assert - single index row and the RecordIdSingle__c convenience field populated
+        List<UoWAuditRecordIndex__c> rows = [SELECT RecordId__c FROM UoWAuditRecordIndex__c];
+        Assert.areEqual(1, rows.size(), 'Single record should create one index row');
+
+        UoWAuditWorkItem__c wi = [SELECT RecordIdSingle__c FROM UoWAuditWorkItem__c LIMIT 1];
+        Assert.areEqual(recId, wi.RecordIdSingle__c, 'RecordIdSingle should be populated for single-record ops');
+    }
+
+    @isTest
+    static void test_customObjectWriter_blankRecordIds_createsNoIndexRows() {
+        // Arrange - work item with no record Ids (e.g. object sampling strategy = NONE)
+        String txnId = 'TXN-NONE-' + System.now().getTime();
+
+        UoWAuditEvent__e txnEvent = UoWAuditTestDataFactory.createTransactionEvent(txnId, 'CUSTOM_OBJECT');
+        UoWAuditEvent__e wiEvent = UoWAuditTestDataFactory.createWorkItemEvent(txnId, 'WI-1', 'CUSTOM_OBJECT');
+        wiEvent.SObjectType__c = 'Account';
+        wiEvent.EndTime__c = System.now();
+        // RecordIds__c intentionally left blank
+
+        // Act
+        Test.startTest();
+        UoWAuditCustomObjectWriter.writeAuditData(
+            new List<UoWAuditEvent__e>{ txnEvent },
+            new List<UoWAuditEvent__e>{ wiEvent }
+        );
+        Test.stopTest();
+
+        // Assert
+        Assert.areEqual(0, [SELECT COUNT() FROM UoWAuditRecordIndex__c],
+            'No index rows should be created when there are no record Ids');
+        UoWAuditWorkItem__c wi = [SELECT RecordIdSingle__c FROM UoWAuditWorkItem__c LIMIT 1];
+        Assert.areEqual(null, wi.RecordIdSingle__c, 'RecordIdSingle should be blank when no record Ids');
+    }
+
+    @isTest
+    static void test_customObjectWriter_deleteTransaction_cascadesIndexRows() {
+        // Arrange
+        String txnId = 'TXN-CASCADE-' + System.now().getTime();
+        UoWAuditEvent__e txnEvent = UoWAuditTestDataFactory.createTransactionEvent(txnId, 'CUSTOM_OBJECT');
+        UoWAuditEvent__e wiEvent = UoWAuditTestDataFactory.createWorkItemEvent(txnId, 'WI-1', 'CUSTOM_OBJECT');
+        wiEvent.SObjectType__c = 'Account';
+        wiEvent.EndTime__c = System.now();
+        wiEvent.RecordIds__c = '001000000000010AAA';
+
+        UoWAuditCustomObjectWriter.writeAuditData(
+            new List<UoWAuditEvent__e>{ txnEvent },
+            new List<UoWAuditEvent__e>{ wiEvent }
+        );
+        Assert.areEqual(1, [SELECT COUNT() FROM UoWAuditRecordIndex__c], 'Index row should exist before delete');
+
+        // Act - delete the parent transaction
+        Test.startTest();
+        delete [SELECT Id FROM UoWAuditTransaction__c WHERE TransactionId__c = :txnId];
+        Test.stopTest();
+
+        // Assert - master-detail cascade removes the index rows
+        Assert.areEqual(0, [SELECT COUNT() FROM UoWAuditRecordIndex__c],
+            'Deleting the transaction should cascade-delete index rows');
+    }
 }

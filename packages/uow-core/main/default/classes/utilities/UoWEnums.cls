@@ -185,7 +185,8 @@ public inherited sharing class UoWEnums {
     public enum SamplingStrategy {
         FIRST_N,
         LAST_N,
-        RANDOM
+        RANDOM,
+        NONE        // No record capture (disables snapshot sampling and record-index reverse lookup)
     }
 
     // ============================================================================

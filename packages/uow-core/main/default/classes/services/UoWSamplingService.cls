@@ -37,6 +37,13 @@ public inherited sharing class UoWSamplingService {
             return new List<Integer>();
         }
 
+        // NONE strategy = capture no records at all (the per-object off-switch). This is
+        // authoritative and wins over the applySampling/size gates below, so that even small
+        // record sets and failed records are excluded from the snapshot / reverse index.
+        if (config?.samplingStrategy == UoWEnums.SamplingStrategy.NONE) {
+            return new List<Integer>();
+        }
+
         // Normalize failedIndices
         Set<Integer> failures = failedIndices != null ? failedIndices : new Set<Integer>();
 

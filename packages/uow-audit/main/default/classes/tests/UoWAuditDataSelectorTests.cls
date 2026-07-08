@@ -832,4 +832,107 @@ private class UoWAuditDataSelectorTests {
         }
         Test.stopTest();
     }
+
+    // ============================================================================
+    // RECORD INDEX QUERIES (REVERSE LOOKUP)
+    // ============================================================================
+
+    @isTest
+    static void test_getAuditActivityByRecordId_nullId_returnsEmpty() {
+        Test.startTest();
+        List<UoWAuditRecordIndex__c> result =
+            UoWAuditDataSelector.getInstance().getAuditActivityByRecordId(null, 50);
+        Test.stopTest();
+        Assert.areEqual(0, result.size(), 'Null record Id should return empty list');
+    }
+
+    @isTest
+    static void test_getAuditActivityByRecordId_returnsRowsMostRecentFirst() {
+        // Arrange - two work items touching the same record at different times
+        String recId = '001000000000777AAA';
+        UoWAuditTransaction__c txn = new UoWAuditTransaction__c(
+            TransactionId__c = 'TXN-IDX-SEL-1',
+            CorrelationId__c = 'CORR-IDX-SEL-1',
+            TransactionStatus__c = 'SUCCESS',
+            StartTime__c = DateTime.now().addMinutes(-2),
+            EndTime__c = DateTime.now()
+        );
+        insert txn;
+
+        UoWAuditWorkItem__c wi = new UoWAuditWorkItem__c(
+            AuditTransaction__c = txn.Id, Name = 'WI-IDX-1',
+            WorkType__c = 'DML', WorkItemStatus__c = 'SUCCESS',
+            SObjectType__c = 'Account', DmlOperation__c = 'INSERT_OP'
+        );
+        insert wi;
+
+        insert new List<UoWAuditRecordIndex__c>{
+            new UoWAuditRecordIndex__c(
+                AuditWorkItem__c = wi.Id, RecordId__c = recId,
+                SObjectType__c = 'Account', Operation__c = 'INSERT',
+                Timestamp__c = DateTime.now().addMinutes(-10)
+            ),
+            new UoWAuditRecordIndex__c(
+                AuditWorkItem__c = wi.Id, RecordId__c = recId,
+                SObjectType__c = 'Account', Operation__c = 'UPDATE',
+                Timestamp__c = DateTime.now()
+            ),
+            // A different record - should be excluded
+            new UoWAuditRecordIndex__c(
+                AuditWorkItem__c = wi.Id, RecordId__c = '001000000000888AAA',
+                SObjectType__c = 'Account', Operation__c = 'INSERT',
+                Timestamp__c = DateTime.now()
+            )
+        };
+
+        // Act
+        User testUser = getAuditAdminUser();
+        List<UoWAuditRecordIndex__c> result;
+        System.runAs(testUser) {
+            Test.startTest();
+            result = UoWAuditDataSelector.getInstance().getAuditActivityByRecordId(recId, 50);
+            Test.stopTest();
+        }
+
+        // Assert
+        Assert.areEqual(2, result.size(), 'Should return only rows for the requested record');
+        Assert.areEqual('UPDATE', result[0].Operation__c, 'Most recent row should be first');
+        Assert.areEqual('INSERT', result[1].Operation__c, 'Older row should be second');
+        Assert.areEqual('WI-IDX-1', result[0].AuditWorkItem__r.Name, 'Parent work item should be traversed');
+    }
+
+    @isTest
+    static void test_getAuditActivityByRecordId_respectsLimit() {
+        // Arrange - three rows for one record
+        String recId = '001000000000999AAA';
+        UoWAuditTransaction__c txn = new UoWAuditTransaction__c(
+            TransactionId__c = 'TXN-IDX-SEL-2', CorrelationId__c = 'CORR-IDX-SEL-2',
+            TransactionStatus__c = 'SUCCESS', StartTime__c = DateTime.now(), EndTime__c = DateTime.now()
+        );
+        insert txn;
+        UoWAuditWorkItem__c wi = new UoWAuditWorkItem__c(
+            AuditTransaction__c = txn.Id, Name = 'WI-IDX-2',
+            WorkType__c = 'DML', WorkItemStatus__c = 'SUCCESS', SObjectType__c = 'Account'
+        );
+        insert wi;
+        List<UoWAuditRecordIndex__c> rows = new List<UoWAuditRecordIndex__c>();
+        for (Integer i = 0; i < 3; i++) {
+            rows.add(new UoWAuditRecordIndex__c(
+                AuditWorkItem__c = wi.Id, RecordId__c = recId,
+                SObjectType__c = 'Account', Operation__c = 'INSERT',
+                Timestamp__c = DateTime.now().addSeconds(-i)
+            ));
+        }
+        insert rows;
+
+        // Act
+        User testUser = getAuditAdminUser();
+        List<UoWAuditRecordIndex__c> result;
+        System.runAs(testUser) {
+            result = UoWAuditDataSelector.getInstance().getAuditActivityByRecordId(recId, 2);
+        }
+
+        // Assert
+        Assert.areEqual(2, result.size(), 'Should respect the query limit');
+    }
 }

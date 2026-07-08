@@ -336,9 +336,16 @@ public without sharing class UoWAuditCustomObjectWriter {
             workItems.add(wi);
         }
 
-        // Insert work items
+        // Insert work items, then build reverse-lookup index rows. The index pass runs in a
+        // finally block so that even when some work items fail (insertWorkItems throws after a
+        // partial insert), index rows are still written for the ones that got an Id. events[i]
+        // and workItems[i] stay positionally correlated (built in the same order above).
         if (!workItems.isEmpty()) {
-            insertWorkItems(workItems);
+            try {
+                insertWorkItems(workItems);
+            } finally {
+                insertRecordIndexes(workItems, events);
+            }
         }
     }
 
@@ -405,6 +412,12 @@ public without sharing class UoWAuditCustomObjectWriter {
 
         // Snapshot
         wi.Snapshot__c = event.Snapshot__c;
+
+        // Single-record convenience field: populate when exactly one record was processed
+        // (RecordIds__c carries the sampled record Ids; a single id has no comma).
+        if (String.isNotBlank(event.RecordIds__c) && !event.RecordIds__c.contains(',')) {
+            wi.RecordIdSingle__c = event.RecordIds__c.trim();
+        }
 
         // Masking information
         wi.MaskingApplied__c = event.MaskingApplied__c;
@@ -615,6 +628,67 @@ public without sharing class UoWAuditCustomObjectWriter {
                 'Failed to insert ' + errors.size() + ' work item(s): ' + String.join(errors, '; ')
             );
         }
+    }
+
+    // ============================================================================
+    // PRIVATE HELPER METHODS - RECORD INDEX (REVERSE LOOKUP)
+    // ============================================================================
+
+    /**
+     * @description Build and insert UoWAuditRecordIndex__c rows - one per sampled record Id on
+     *              each work item - so a business record page can query which work items/
+     *              transactions touched it. Best-effort: index rows are a non-critical
+     *              convenience layer, so partial failures are swallowed rather than thrown
+     *              (this also runs in a finally block and must not mask work-item errors).
+     * @param workItems Inserted work items; only those with a non-null Id are indexed
+     * @param events The originating events, positionally correlated with workItems
+     */
+    private static void insertRecordIndexes(
+        List<UoWAuditWorkItem__c> workItems,
+        List<UoWAuditEvent__e> events
+    ) {
+        List<UoWAuditRecordIndex__c> indexRows = new List<UoWAuditRecordIndex__c>();
+
+        for (Integer i = 0; i < events.size(); i++) {
+            UoWAuditWorkItem__c wi = workItems[i];
+            UoWAuditEvent__e event = events[i];
+
+            // Skip work items that failed to insert (no Id) or carry no record Ids
+            if (wi.Id == null || String.isBlank(event.RecordIds__c)) {
+                continue;
+            }
+
+            String operation = stripOperationSuffix(event.DmlOperation__c);
+            for (String rawId : event.RecordIds__c.split(',')) {
+                String recordId = rawId.trim();
+                if (String.isBlank(recordId)) {
+                    continue;
+                }
+                indexRows.add(new UoWAuditRecordIndex__c(
+                    AuditWorkItem__c = wi.Id,
+                    RecordId__c = recordId,
+                    SObjectType__c = event.SObjectType__c,
+                    Operation__c = operation,
+                    Timestamp__c = event.EndTime__c
+                ));
+            }
+        }
+
+        if (!indexRows.isEmpty()) {
+            Database.insert(indexRows, false);
+        }
+    }
+
+    /**
+     * @description Strip the trailing _OP suffix from a DML operation name (e.g. INSERT_OP -> INSERT).
+     * @param dmlOperation The raw DmlOperation__c value
+     * @return The display operation, or null when the input is blank
+     */
+    private static String stripOperationSuffix(String dmlOperation) {
+        if (String.isBlank(dmlOperation)) {
+            return null;
+        }
+        return dmlOperation.removeEnd('_OP');
     }
 
     // ============================================================================
