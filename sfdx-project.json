@@ -1,23 +1,23 @@
 {
   "packageDirectories": [
     {
-      "versionName": "ver 1.0",
-      "versionNumber": "1.0.0.NEXT",
+      "versionName": "ver 1.0.1",
+      "versionNumber": "1.0.1.NEXT",
       "path": "packages/uow-core",
       "default": false,
       "package": "UoW Core",
       "versionDescription": ""
     },
     {
-      "versionName": "ver 1.0",
-      "versionNumber": "1.0.0.NEXT",
+      "versionName": "ver 1.0.1",
+      "versionNumber": "1.0.1.NEXT",
       "path": "packages/uow-audit",
       "default": true,
       "package": "UoW Audit",
       "versionDescription": "",
       "dependencies": [
         {
-          "package": "UoW Core@1.0.0-1"
+          "package": "UoW Core@1.0.1-1"
         }
       ]
     }
@@ -30,6 +30,8 @@
     "UoW Core": "0HoJ5000000TN28KAG",
     "UoW Audit": "0HoJ5000000TN2DKAW",
     "UoW Core@1.0.0-1": "04tJ5000000HHajIAG",
-    "UoW Audit@1.0.0-1": "04tJ5000000HHaoIAG"
+    "UoW Audit@1.0.0-1": "04tJ5000000HHaoIAG",
+    "UoW Core@1.0.1-1": "04tJ5000000HHprIAG",
+    "UoW Audit@1.0.1-1": "04tJ5000000HHpwIAG"
   }
 }
