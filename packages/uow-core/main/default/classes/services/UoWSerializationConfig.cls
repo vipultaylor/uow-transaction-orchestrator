@@ -105,6 +105,23 @@ public inherited sharing class UoWSerializationConfig {
         UoWSerializationConfig config = new UoWSerializationConfig();
         config.applyMasking = true;
 
+        // Resolve the strategy first so that NONE is authoritative regardless of sample size.
+        // (NONE means "capture no records for this object"; it must win even when the size is unset.)
+        if (objSetting != null && String.isNotBlank(objSetting.auditSampleStrategy)) {
+            try {
+                config.samplingStrategy = UoWEnums.SamplingStrategy.valueOf(objSetting.auditSampleStrategy);
+            } catch (Exception ex) {
+                config.samplingStrategy = UoWEnums.SamplingStrategy.FIRST_N;
+            }
+        }
+
+        // NONE = no record capture: sampling logic short-circuits to an empty selection.
+        if (config.samplingStrategy == UoWEnums.SamplingStrategy.NONE) {
+            config.applySampling = true;
+            config.samplingCount = 0;
+            return config;
+        }
+
         if (objSetting == null || objSetting.auditSampleSize == null || objSetting.auditSampleSize <= 0) {
             config.applySampling = false;
             return config;
@@ -112,14 +129,6 @@ public inherited sharing class UoWSerializationConfig {
 
         config.applySampling = true;
         config.samplingCount = Integer.valueOf(objSetting.auditSampleSize);
-
-        if (String.isNotBlank(objSetting.auditSampleStrategy)) {
-            try {
-                config.samplingStrategy = UoWEnums.SamplingStrategy.valueOf(objSetting.auditSampleStrategy);
-            } catch (Exception ex) {
-                config.samplingStrategy = UoWEnums.SamplingStrategy.FIRST_N;
-            }
-        }
 
         return config;
     }

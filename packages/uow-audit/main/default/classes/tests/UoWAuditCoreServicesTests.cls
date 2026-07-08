@@ -263,6 +263,31 @@ private class UoWAuditCoreServicesTests {
     }
 
     @isTest
+    static void test_publisher_customObjectMode_buildsRecordIndexFromSnapshots() {
+        // Arrange - DML inserts only, so work items carry snapshots with real (mock) record Ids
+        UnitOfWork uow = UoWTestHelpers.generateUoW_DmlInsertsOnly('TestConfigAllMocks');
+        UoWContext ctx = uow.getContext();
+        UoWResult result = uow.commitWork();
+
+        UoWAuditPlugin plugin = new UoWAuditPlugin(); // default CUSTOM_OBJECT mode
+
+        // Act - publish + deliver platform events (subscriber flow persists records + index rows)
+        Test.startTest();
+        UoWAuditEventPublisher.publishAuditEvents(ctx, result, plugin);
+        Test.stopTest();
+
+        // Assert - reverse-lookup index rows were created for the sampled DML records
+        List<UoWAuditRecordIndex__c> indexRows = [
+            SELECT RecordId__c, SObjectType__c, Operation__c FROM UoWAuditRecordIndex__c
+        ];
+        Assert.isFalse(indexRows.isEmpty(), 'DML work items should produce reverse-lookup index rows');
+        for (UoWAuditRecordIndex__c row : indexRows) {
+            Assert.isNotNull(row.RecordId__c, 'Each index row should carry a record Id');
+            Assert.isNotNull(row.SObjectType__c, 'Each index row should carry the SObject type');
+        }
+    }
+
+    @isTest
     static void test_publisher_bigObjectMode_skipsTransactionEvent() {
         // Arrange
         UnitOfWork uow = UoWTestHelpers.generateUoW_AllWorkItems('TestConfigAllMocks');

@@ -1,0 +1,100 @@
+<!--
+  This file is part of the UoW Transaction Orchestrator project, released under the MIT License.
+  See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator
+-->
+<template>
+    <lightning-card title={cardTitle} icon-name="standard:record">
+        <!-- Error -->
+        <template lwc:if={error}>
+            <div class="slds-p-horizontal_small slds-p-bottom_small">
+                <div class="slds-text-color_error" role="alert">{error}</div>
+            </div>
+        </template>
+
+        <!-- Empty state -->
+        <template lwc:if={showEmptyState}>
+            <div class="slds-p-around_small">
+                <c-uow-empty-state
+                    icon-name="utility:search"
+                    heading="No Audit Activity"
+                    body="No UoW audit activity has been recorded for this record.">
+                </c-uow-empty-state>
+            </div>
+        </template>
+
+        <!-- Activity, grouped by transaction -->
+        <template lwc:if={hasActivity}>
+            <ul class="slds-has-dividers_bottom-space">
+                <template for:each={transactions} for:item="txn">
+                    <li key={txn.transactionId} class="slds-item uow-txn-group">
+                        <!-- Transaction header (click to expand/collapse) -->
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-vertical_xx-small uow-txn-header"
+                            data-id={txn.transactionId}
+                            onclick={handleToggle}>
+                            <lightning-icon
+                                icon-name={txn.toggleIcon}
+                                size="xx-small"
+                                class="slds-m-right_x-small slds-shrink-none">
+                            </lightning-icon>
+                            <lightning-icon
+                                icon-name={txn.statusIcon}
+                                size="x-small"
+                                class="slds-m-right_x-small slds-shrink-none">
+                            </lightning-icon>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-wrap slds-col slds-grow">
+                                <a href="#"
+                                    class="slds-text-link slds-m-right_x-small"
+                                    data-id={txn.transactionId}
+                                    onclick={handleTransactionNav}>{txn.name}</a>
+                                <span class={txn.statusBadgeClass}>{txn.status}</span>
+                                <template lwc:if={txn.startTimeMs}>
+                                    <span class="slds-text-body_small slds-text-color_weak slds-m-left_x-small">
+                                        <lightning-relative-date-time value={txn.startTimeMs}></lightning-relative-date-time>
+                                    </span>
+                                </template>
+                            </div>
+                            <template lwc:if={txn.metaLine}>
+                                <span class="slds-text-body_small slds-text-color_weak slds-m-left_x-small slds-shrink-none">
+                                    {txn.metaLine}
+                                </span>
+                            </template>
+                        </div>
+
+                        <!-- Work items that touched this record -->
+                        <div class={txn.bodyClass}>
+                            <ul class="slds-m-left_large">
+                                <template for:each={txn.workItems} for:item="wi">
+                                    <li key={wi.workItemId}
+                                        class="slds-grid slds-grid_vertical-align-center slds-p-vertical_xxx-small uow-work-item-row">
+                                        <span class={wi.iconClass}>
+                                            <lightning-icon icon-name={wi.iconName} size="x-small"></lightning-icon>
+                                        </span>
+                                        <a href="#"
+                                            class="slds-text-link slds-m-horizontal_x-small"
+                                            data-id={wi.workItemId}
+                                            onclick={handleWorkItemNav}>{wi.label}</a>
+                                        <template lwc:if={wi.countLabel}>
+                                            <span class="slds-badge slds-m-right_x-small">{wi.countLabel}</span>
+                                        </template>
+                                        <span class="slds-text-body_small slds-text-color_weak">
+                                            <lightning-icon
+                                                icon-name={wi.statusIcon}
+                                                size="xx-small"
+                                                class="slds-m-right_xxx-small">
+                                            </lightning-icon>{wi.statusText}
+                                        </span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+
+            <!-- Footer note: only sampled records are indexed -->
+            <div class="slds-p-around_small slds-text-align_center slds-text-body_small slds-text-color_weak">
+                Reflects records captured in the audit sample.
+            </div>
+        </template>
+    </lightning-card>
+</template>

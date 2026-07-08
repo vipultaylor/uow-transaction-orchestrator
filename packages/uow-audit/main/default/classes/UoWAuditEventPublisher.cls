@@ -316,6 +316,13 @@ public inherited sharing class UoWAuditEventPublisher {
         UoWSerializationConfig serializationConfig = getSerializationConfigForWorkItem(ctx, workItem);
         UoWSerializationService.prepareWorkItemForAuditSnapshot(workItem, serializationConfig);
         evt.Snapshot__c = JSON.serialize(workItem);
+
+        // Reverse-lookup record Ids for UoWAuditRecordIndex__c. Must run AFTER the snapshot is
+        // prepared above, since it reads the sampled snapshots' rids (getSnapshots()). Naturally
+        // blank when the object's sampling strategy is NONE (empty snapshot).
+        if (workItem instanceof UoWDmlWorkItem) {
+            evt.RecordIds__c = serializeSnapshotRecordIds((UoWDmlWorkItem) workItem);
+        }
     }
 
     // ============================================================================
@@ -732,6 +739,36 @@ public inherited sharing class UoWAuditEventPublisher {
             evt.UpsertCreatedCount__c = upsertStats.inserts;
             evt.UpsertUpdatedCount__c = upsertStats.updates;
         }
+    }
+
+    /**
+     * @description Join the unique, non-null result Ids from a DML work item's sampled snapshots
+     *              into a comma-separated string for UoWAuditEvent__e.RecordIds__c.
+     * @param dml The DML work item whose sampled snapshots to read
+     * @return Comma-separated record Ids, or null when there are none
+     */
+    private static String serializeSnapshotRecordIds(UoWDmlWorkItem dml) {
+        List<UoWDmlWorkItem.RecordSnapshot> snapshots = dml.getSnapshots();
+        if (snapshots == null || snapshots.isEmpty()) {
+            return null;
+        }
+
+        Set<Id> uniqueIds = new Set<Id>();
+        for (UoWDmlWorkItem.RecordSnapshot snap : snapshots) {
+            if (snap.rid != null) {
+                uniqueIds.add(snap.rid);
+            }
+        }
+
+        if (uniqueIds.isEmpty()) {
+            return null;
+        }
+
+        List<String> idStrings = new List<String>();
+        for (Id recordId : uniqueIds) {
+            idStrings.add(String.valueOf(recordId));
+        }
+        return String.join(idStrings, ',');
     }
 
     /**

@@ -1,0 +1,81 @@
+/*------------------------------------------------------------------------------------------------*/
+/* This file is part of the UoW Transaction Orchestrator project, released under the MIT License. */
+/* See LICENSE file or go to https://github.com/vipultaylor/uow-transaction-orchestrator           */
+/*------------------------------------------------------------------------------------------------*/
+/* ============================================================================
+   RECORD AUDIT ACTIVITY
+   Inline record-page view of the UoW audit activity that touched this record.
+   ============================================================================ */
+@import 'c/uowSharedStylesModule';
+
+.uow-txn-group {
+    padding-left: var(--slds-g-spacing-3, 0.5rem);
+    padding-right: var(--slds-g-spacing-3, 0.5rem);
+}
+
+.uow-txn-header {
+    cursor: pointer;
+}
+
+.uow-txn-header:hover {
+    background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
+}
+
+/* ============================================================================
+   WORK ITEM ROW - colored icons by work type (reuses shared category tokens)
+   ============================================================================ */
+
+.uow-work-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    filter: brightness(0.7);
+}
+
+.uow-work-item-icon-dml {
+    --slds-c-icon-color-foreground-default: var(--uow-category-dml);
+}
+
+.uow-work-item-icon-event {
+    --slds-c-icon-color-foreground-default: var(--uow-category-event);
+}
+
+.uow-work-item-icon-email {
+    --slds-c-icon-color-foreground-default: var(--uow-category-email);
+}
+
+.uow-work-item-icon-notification {
+    --slds-c-icon-color-foreground-default: var(--uow-category-notification);
+}
+
+.uow-work-item-icon-flow {
+    --slds-c-icon-color-foreground-default: var(--uow-category-flow);
+}
+
+.uow-work-item-icon-callout {
+    --slds-c-icon-color-foreground-default: var(--uow-category-callout);
+}
+
+.uow-work-item-icon-default {
+    --slds-c-icon-color-foreground-default: var(--uow-category-default);
+}
+
+/* ============================================================================
+   STATUS BADGES - UoW semantic status colors
+   ============================================================================ */
+
+.uow-status-badge_success {
+    background-color: var(--uow-status-success-bg);
+    color: var(--uow-status-success);
+}
+
+.uow-status-badge_warning {
+    background-color: var(--uow-status-warning-bg);
+    color: var(--uow-status-warning);
+}
+
+.uow-status-badge_error {
+    background-color: var(--uow-status-error-bg);
+    color: var(--uow-status-error);
+}
